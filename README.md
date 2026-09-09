@@ -1,4 +1,4 @@
-# HLANG Version 2.1 FULL RELEASE
+# HLANG Version 2.2.1 FULL RELEASE
 A open source java based shell created by yours truly.
 
 This repo also comes in with a built in programming language called "HLANG" (Henry's Language).
@@ -14,7 +14,7 @@ This repo will have a built in shell called "HSh" or Henry's Shell for short.
 # Installation
 | Release | HLANG Version | Source |
 |---------|------|---------|
-| Windows | v2.1 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.1) |
+| Windows | v2.2.1 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.2.1) |
 | Debian Linux | v2.1 | [HLANG Installation Debian Linux](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Ubuntu_Debian_Release_2.1) |
 | Red Hat | N/A | N/A |
 | Arch Linux | N/A | N/A |
@@ -49,6 +49,8 @@ To run any hlang file, type:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
+| v2.2.1 | Aug 31, 2026 | Changed the syntax for floating point numbers to '_'. |
+| v2.2 | Aug 28, 2026 | Added String Functions and Ways to add stuff to lists. |
 | Web0.2 | Aug 24, 2026 | Added the Changelog Page and some future plans |
 | Web0.1 | Jun 30, 2026 | Added Download Page and Home page for Website |
 | v2.1 | Jun 4, 2026 | Doesn't require you to install java anymore. |
@@ -81,5 +83,5 @@ To run any hlang file, type:
 |---------|------|---------|
 | Web1.0 | SOON | Online Compiler + Website |
 | Web1.1 | SOON | Offical Manual |
-| v2.2 | Soon | String and Array operations and universal arithmitic logic handling. |
-| v2.3 | Soon | CSV Functionality. |
+| v2.3 | Soon | List Functionality. |
+| v2.4 | Soon | CSV Functionality. |

@@ -32,13 +32,15 @@ public class HLANG {
         listlogic,
         input,
         mapcar,
+        returnto,
+        releaseto,
         // Data Types
         integer,
         floating,
         str,
         bool,
         list,
-        wildcard
+        wildcard,
     }
 
     private static class Token<T> {
@@ -100,23 +102,27 @@ public class HLANG {
                 LinkedList<Token<?>> parameters,
                 HashMap<String, Token<?>> variables,
                 Stack<Token<?>> ValStack,
-                HashMap<String, HLangFunct> function) throws Exception {
+                HashMap<String, HLangFunct> function,
+                Stack<Token<?>> returnStack) throws Exception {
+            //System.out.println(parameters);
+            if (!parameters.isEmpty()) {
+                HashMap<String, Token<?>> localVars = new HashMap<>();
+                for (String n : param.keySet()) {
+                    Token<?> param1 = parameters.remove();
 
-            HashMap<String, Token<?>> localVars = new HashMap<>();
-
-            for (String n : param.keySet()) {
-                Token<?> param1 = parameters.remove();
-
-                if (param1.type == TokenType.var) {
-                    localVars.put(
-                            n,
-                            variables.get(((String) param1.data).substring(1)));
-                } else {
-                    localVars.put(n, param1);
+                    if (param1.type == TokenType.var) {
+                        localVars.put(
+                                n,
+                                variables.get(((String) param1.data).substring(1)));
+                    } else {
+                        localVars.put(n, param1);
+                    }
                 }
+                Compiler((String) prog.data, localVars, ValStack, function, returnStack);
+            } else {
+                Compiler((String) prog.data, new HashMap<>(), ValStack, function, returnStack);
             }
 
-            Compiler((String) prog.data, localVars, ValStack, function);
         }
     }
 
@@ -133,7 +139,7 @@ public class HLANG {
         // Custom Split
         while (i < cmd.length() && !isFinished) {
             char curChar = cmd.charAt(i);
-            // System.out.println("Cur: " + cur);
+            //System.out.println("Cur: " + cur);
             if (listBrackets > 0) {
                 cur += curChar;
 
@@ -185,8 +191,9 @@ public class HLANG {
                     case ' ':
                         if (cur.length() != 0) {
                             strList.add(cur);
+                            cur = "";
                         }
-                        cur = "";
+
                         break;
                     case '{':
                         cur += curChar;
@@ -276,6 +283,12 @@ public class HLANG {
                     case "/?":
                         lexedList.add(new Token<String>(curStr, TokenType.wildcard));
                         break;
+                    case "/ret":
+                        lexedList.add(new Token<String>(curStr, TokenType.returnto));
+                        break;
+                    case "/rel":
+                        lexedList.add(new Token<String>(curStr, TokenType.releaseto));
+                        break;
                     default:
                         lexedList.add(new Token<String>(curStr, TokenType.var));
                         break;
@@ -294,8 +307,9 @@ public class HLANG {
                 }
                 lexedList.add(new Token<LinkedList<Token<?>>>(list, TokenType.list));
             } else {
-                if (curStr.contains(".")) {
+                if (curStr.contains("_")) {
                     try {
+                        curStr = curStr.replace("_", ".");
                         lexedList.add(new Token<Double>(Double.parseDouble(curStr), TokenType.floating));
                     } catch (NumberFormatException e) {
                         throw new Exception("HLANG Lexer cannot determine that " + curStr + " is a float.");
@@ -381,7 +395,8 @@ public class HLANG {
                     TokenType.listdec, TokenType.cons, TokenType.car, TokenType.cdr, TokenType.input, TokenType.mapcar:
                 childrenCount = 2;
                 break;
-            case TokenType.singleArith, TokenType.logicalnot, TokenType.output, TokenType.listlogic:
+            case TokenType.singleArith, TokenType.logicalnot, TokenType.output, TokenType.listlogic, TokenType.returnto,
+                    TokenType.releaseto:
                 childrenCount = 1;
                 break;
             case TokenType.ifstmt, TokenType.functcreate:
@@ -427,13 +442,14 @@ public class HLANG {
     }
 
     private static void SingleLineCompiler(String cmd, HashMap<String, Token<?>> variables, Stack<Token<?>> ValStack,
-            HashMap<String, HLangFunct> functions)
+            HashMap<String, HLangFunct> functions, Stack<Token<?>> returnStack)
             throws Exception {
         // System.out.println(cmd);
         LinkedList<Token<?>> interpret = Interpreter(Parser(Lexer(cmd)));
         // System.out.println("Val Stack: " + ValStack);
         // System.out.println("Interpeted String: " + interpret);
         // System.out.println("Vars: " + variables);
+        // System.out.println("Return Stack: " + returnStack);
         while (!interpret.isEmpty()) {
             Token<?> cur = interpret.remove();
             switch (cur.type) {
@@ -496,22 +512,19 @@ public class HLANG {
                                     boolean v1 = (Boolean) X1.data;
                                     ValStack.push(new Token<>(v1 + v2, TokenType.str));
                                 }
-                            }
-                            else if (X1.type == TokenType.list && X2.type == TokenType.list){
+                            } else if (X1.type == TokenType.list && X2.type == TokenType.list) {
                                 @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
                                 @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
                                 v1.addAll(v2);
                                 ValStack.push(new Token<>(v1, TokenType.list));
-                            }
-                            else if (X1.type == TokenType.list){
+                            } else if (X1.type == TokenType.list) {
                                 @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
                                 v1.addLast(X2);
                                 ValStack.push(new Token<>(v1, TokenType.list));
-                            }
-                            else if (X2.type == TokenType.list){
+                            } else if (X2.type == TokenType.list) {
                                 @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
                                 v2.addFirst(X1);
@@ -552,8 +565,7 @@ public class HLANG {
                                 String v1 = (String) X2.data;
                                 int v2 = (int) X1.data;
                                 ValStack.push(new Token<>(v1.charAt(v2) + "", TokenType.str));
-                            } 
-                            else {
+                            } else {
                                 throw new Exception("Cannot Compile: Subtraction Type Error!");
                             }
                             break;
@@ -604,16 +616,14 @@ public class HLANG {
                                 String v2 = (String) X2.data;
 
                                 ValStack.push(new Token<>(countSubstringOccurrences(v1, v2), TokenType.str));
-                            } 
-                            else if (X1.type == TokenType.str && X2.type == TokenType.wildcard) {
+                            } else if (X1.type == TokenType.str && X2.type == TokenType.wildcard) {
                                 String v1 = (String) X1.data;
                                 String v2 = (String) X2.data;
                                 ValStack.push(new Token<>(v1.length(), TokenType.integer));
-                            }
-                            else if (X1.type == TokenType.wildcard && X2.type == TokenType.wildcard || X2.type == TokenType.str) {
+                            } else if (X1.type == TokenType.wildcard && X2.type == TokenType.wildcard
+                                    || X2.type == TokenType.str) {
                                 throw new Exception("Infinity Error");
-                            }
-                            else {
+                            } else {
                                 throw new Exception("Cannot Compile: Multiplication Type Error!");
                             }
                             break;
@@ -1021,13 +1031,13 @@ public class HLANG {
                     Token<?> trueCond = ValStack.pop();
                     Token<?> elseCond = ValStack.pop();
 
-                    Compiler((String) checkCond.data, variables, ValStack, functions);
+                    Compiler((String) checkCond.data, variables, ValStack, functions, returnStack);
                     Token<?> condition = ValStack.pop();
                     boolean cond = (Boolean) condition.data;
                     if (cond) {
-                        Compiler((String) trueCond.data, variables, ValStack, functions);
+                        Compiler((String) trueCond.data, variables, ValStack, functions, returnStack);
                     } else {
-                        Compiler((String) elseCond.data, variables, ValStack, functions);
+                        Compiler((String) elseCond.data, variables, ValStack, functions, returnStack);
                     }
                     break;
                 case TokenType.functcreate:
@@ -1051,7 +1061,8 @@ public class HLANG {
                         paramList.add(Lexer(paramArr.get(i) + ".").get(0));
                     }
                     // System.out.println(paramList);
-                    functions.get((String) functName.data).CallFunction(paramList, variables, ValStack, functions);
+                    functions.get((String) functName.data).CallFunction(paramList, variables, ValStack, functions,
+                            returnStack);
                     break;
                 case TokenType.listdec:
                     Token<?> varname = ValStack.pop();
@@ -1105,6 +1116,19 @@ public class HLANG {
                 case TokenType.wildcard:
                     ValStack.push(new Token<>("?", TokenType.wildcard));
                     break;
+                case TokenType.returnto:
+                    Token<?> dat = ValStack.pop();
+                    returnStack.push(dat);
+                    break;
+                case TokenType.releaseto:
+                    Token<?> variable = ValStack.pop();
+                    dat = returnStack.pop();
+                    if (variable.type == TokenType.varname) {
+                        variables.put((String) variable.data, dat);
+                    } else {
+                        throw new Exception("Cannot Compile: Invaild Variable Name!");
+                    }
+                    break;
                 default:
                     break;
             }
@@ -1117,43 +1141,58 @@ public class HLANG {
 
         int bracketDepth = 0;
         int parenDepth = 0;
+        boolean inString = false;
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
 
-            switch (c) {
-                case '[':
-                    bracketDepth++;
-                    current.append(c);
-                    break;
+            // Toggle string mode when we encounter a quote
+            if (c == '"') {
+                inString = !inString;
+                current.append(c);
+                continue;
+            }
 
-                case ']':
-                    bracketDepth--;
-                    current.append(c);
-                    break;
-
-                case '(':
-                    parenDepth++;
-                    current.append(c);
-                    break;
-
-                case ')':
-                    parenDepth--;
-                    current.append(c);
-                    break;
-
-                default:
-                    if (Character.isWhitespace(c)
-                            && bracketDepth == 0
-                            && parenDepth == 0) {
-
-                        if (current.length() > 0) {
-                            result.add(current.toString());
-                            current.setLength(0);
-                        }
-                    } else {
+            // Only track brackets/parentheses when we're outside a string
+            if (!inString) {
+                switch (c) {
+                    case '[':
+                        bracketDepth++;
                         current.append(c);
-                    }
+                        break;
+
+                    case ']':
+                        bracketDepth--;
+                        current.append(c);
+                        break;
+
+                    case '(':
+                        parenDepth++;
+                        current.append(c);
+                        break;
+
+                    case ')':
+                        parenDepth--;
+                        current.append(c);
+                        break;
+
+                    default:
+                        if (Character.isWhitespace(c)
+                                && bracketDepth == 0
+                                && parenDepth == 0) {
+
+                            if (current.length() > 0) {
+                                result.add(current.toString());
+                                current.setLength(0);
+                            }
+                        } else {
+                            current.append(c);
+                        }
+                        break;
+                }
+            } else {
+                // Inside a string, whitespace is part of the argument
+                current.append(c);
             }
         }
 
@@ -1165,13 +1204,13 @@ public class HLANG {
     }
 
     public static void Compiler(String cmd, HashMap<String, Token<?>> variables, Stack<Token<?>> ValStack,
-            HashMap<String, HLangFunct> functions)
+            HashMap<String, HLangFunct> functions, Stack<Token<?>> returnStack)
             throws Exception {
         ArrayList<String> compiledLines = customSplit(cmd);
         // System.out.println("Split: " + compiledLines);
         for (int i = 0; i < compiledLines.size(); i++) {
             // System.out.println(compiledLines.get(i));
-            SingleLineCompiler(compiledLines.get(i) + ".", variables, ValStack, functions);
+            SingleLineCompiler(compiledLines.get(i) + ".", variables, ValStack, functions, returnStack);
         }
     }
 

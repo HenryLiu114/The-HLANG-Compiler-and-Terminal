@@ -1,4 +1,4 @@
-# HLANG Version 2.2.1 FULL RELEASE
+# HLANG Version 2.2.2 FULL RELEASE
 A open source java based shell created by yours truly.
 
 This repo also comes in with a built in programming language called "HLANG" (Henry's Language).
@@ -41,7 +41,7 @@ I promise the following for this new 2.0 version:
 Thank You for Understanding,
 Henry
 
-# HSh Version: 2.0
+# HSh Version: 2.2.2
 To run any hlang file, type:
 | hsh <filepath<awdsa>> |
 |-------------------|
@@ -49,8 +49,9 @@ To run any hlang file, type:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
+| v2.2.2 | Sep 9, 2026 | Added the return stack a global lambda variable stack. To add stuff to it /ret with a data point. To take out the first entry /rel. |
 | v2.2.1 | Aug 31, 2026 | Changed the syntax for floating point numbers to '_'. |
-| v2.2 | Aug 28, 2026 | Added String Functions and Ways to add stuff to lists. |
+| v2.2.0 | Aug 28, 2026 | Added String Functions and Ways to add stuff to lists. |
 | Web0.2 | Aug 24, 2026 | Added the Changelog Page and some future plans |
 | Web0.1 | Jun 30, 2026 | Added Download Page and Home page for Website |
 | v2.1 | Jun 4, 2026 | Doesn't require you to install java anymore. |

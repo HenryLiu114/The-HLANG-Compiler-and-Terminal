@@ -14,7 +14,7 @@ This repo will have a built in shell called "HSh" or Henry's Shell for short.
 # Installation
 | Release | HLANG Version | Source |
 |---------|------|---------|
-| Windows | v2.2.1 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.2.2) |
+| Windows | v2.2.2 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.2.2) |
 | Debian Linux | v2.1 | [HLANG Installation Debian Linux](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Ubuntu_Debian_Release_2.1) |
 | Red Hat | N/A | N/A |
 | Arch Linux | N/A | N/A |

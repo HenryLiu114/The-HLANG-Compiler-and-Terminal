@@ -11,6 +11,8 @@ This repo will have a built in shell called "HSh" or Henry's Shell for short.
 
 <img width="202" height="151" alt="Frame 2" src="https://github.com/user-attachments/assets/5e4c374d-422e-4d8a-865e-76b2b57d401d" />
 
+[HLANG OFFICAL WEBSITE](https://henryslanguage.com/)
+
 # Installation
 | Release | HLANG Version | Source |
 |---------|------|---------|
@@ -19,8 +21,6 @@ This repo will have a built in shell called "HSh" or Henry's Shell for short.
 | Red Hat | N/A | N/A |
 | Arch Linux | N/A | N/A |
 | MacOS | N/A | N/A |
-
-
 
 # Note To Users:
 Hello,
@@ -49,6 +49,7 @@ To run any hlang file, type:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
+| Web1.0 | Sep 12, 2026 | Deployed the First Version of the Website. Check: https://henryslanguage.com/ |
 | v2.2.2 | Sep 9, 2026 | Added the return stack a global lambda variable stack. To add stuff to it /ret with a data point. To take out the first entry /rel. |
 | v2.2.1 | Aug 31, 2026 | Changed the syntax for floating point numbers to '_'. |
 | v2.2.0 | Aug 28, 2026 | Added String Functions and Ways to add stuff to lists. |

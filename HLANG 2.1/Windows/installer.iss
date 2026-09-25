@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "HLANG Compiler"
-#define MyAppVersion "2.2.2"
+#define MyAppVersion "2.2.3"
 #define MyAppPublisher "Henry Liu"
 #define MyAppURL "N/A"
 
@@ -12,7 +12,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{0B45CAE8-480A-430E-A7A9-FC9CDEF067A5}
 AppName=HLANG
-AppVersion=2.2.2
+AppVersion=2.2.3
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}

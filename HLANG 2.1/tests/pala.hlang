@@ -1,0 +1,35 @@
+/defun revList (l1 l2) {
+	/if (/isempty l1){
+		/ret /l2.
+	}
+	{
+		/car l1 x.
+		/cdr l1 l1.
+		/add /x /l2.
+		/usefun revList (/l1 /l2).
+	}.
+}.
+
+/defun paladrome (lis1 lis2) {
+	/if (/isempty lis1){
+		/print "Yes".
+	}
+	{
+		/car lis1 x.
+		/car lis2 y.
+		/if (/eq /x /y) {
+			/usefun paladrome (/lis1 /lis2).	
+		}
+		{
+			/print "No".
+		}.
+	}.
+}.
+
+/var x1 [1,1,2,3,2,1,0].
+/copyl x1 cx1.
+/usefun revList (/cx1 []).
+/rel x2.
+/usefun paladrome (/x1 /x2).
+
+

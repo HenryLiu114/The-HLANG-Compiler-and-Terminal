@@ -49,6 +49,7 @@ To run any hlang file, type:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
+| v2.2.3 | Sep 24, 2026 | Added /copyl which makes a new copy of a list. |
 | Web1.0 | Sep 12, 2026 | Deployed the First Version of the Website. Check: https://henryslanguage.com/ |
 | v2.2.2 | Sep 9, 2026 | Added the return stack a global lambda variable stack. To add stuff to it /ret with a data point. To take out the first entry /rel. |
 | v2.2.1 | Aug 31, 2026 | Changed the syntax for floating point numbers to '_'. |

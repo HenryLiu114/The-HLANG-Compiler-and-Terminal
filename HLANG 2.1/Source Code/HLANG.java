@@ -34,6 +34,7 @@ public class HLANG {
         mapcar,
         returnto,
         releaseto,
+        copyl,
         // Data Types
         integer,
         floating,
@@ -289,6 +290,9 @@ public class HLANG {
                     case "/rel":
                         lexedList.add(new Token<String>(curStr, TokenType.releaseto));
                         break;
+                    case "/copyl":
+                        lexedList.add(new Token<String>(curStr, TokenType.copyl));
+                        break;
                     default:
                         lexedList.add(new Token<String>(curStr, TokenType.var));
                         break;
@@ -392,7 +396,8 @@ public class HLANG {
         int childrenCount = 0;
         switch (cur.type) {
             case TokenType.arithmetic, TokenType.vardec, TokenType.logical, TokenType.conditional, TokenType.functdec,
-                    TokenType.listdec, TokenType.cons, TokenType.car, TokenType.cdr, TokenType.input, TokenType.mapcar:
+                    TokenType.listdec, TokenType.cons, TokenType.car, TokenType.cdr, TokenType.input, TokenType.mapcar,
+                    TokenType.copyl:
                 childrenCount = 2;
                 break;
             case TokenType.singleArith, TokenType.logicalnot, TokenType.output, TokenType.listlogic, TokenType.returnto,
@@ -1125,6 +1130,18 @@ public class HLANG {
                     dat = returnStack.pop();
                     if (variable.type == TokenType.varname) {
                         variables.put((String) variable.data, dat);
+                    } else {
+                        throw new Exception("Cannot Compile: Invaild Variable Name!");
+                    }
+                    break;
+                case TokenType.copyl:
+                    Token<?> lit = ValStack.pop();
+                    @SuppressWarnings("unchecked") 
+                    LinkedList<Token<?>> listt = (LinkedList<Token<?>>) lit.data;
+                    Token<?> newList = new Token<>(new LinkedList<Token<?>>(listt),TokenType.list);
+                    Token<?> var = ValStack.pop();
+                    if (var.type == TokenType.varname) {
+                        variables.put((String) var.data, newList);
                     } else {
                         throw new Exception("Cannot Compile: Invaild Variable Name!");
                     }

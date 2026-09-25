@@ -1,6 +1,38 @@
-/defun helloworld (x) {
-    /ret /x.
+/defun revList (l1 l2) {
+	/if (/isempty l1){
+		/ret /l2.
+	}
+	{
+		/car l1 x.
+		/cdr l1 l1.
+		/add /x /l2.
+		/usefun revList (/l1 /l2).
+	}.
 }.
-/usefun helloworld ([1, 5, 6, 100]).
-/rel z.
-/print /z.
+
+/defun paladromeH (lis1 lis2) {
+	/if (/isempty lis1){
+		/print "Yes".
+	}
+	{
+		/car lis1 x.
+		/car lis2 y.
+		/if (/eq /x /y) {
+			/cdr lis1 lis1.
+			/cdr lis2 lis2.
+			/usefun paladromeH (/lis1 /lis2).	
+		}
+		{
+			/print "No".
+		}.
+	}.
+}.
+
+/defun paladrome (l1) {
+	/copyl /l1 cl.
+	/usefun revList (/cl []).
+	/rel l2.
+	/usefun paladromeH (/l1 /l2).
+}.
+
+/usefun paladrome ([0,1,2,3,2,1]).

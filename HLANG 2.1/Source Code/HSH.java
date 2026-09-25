@@ -26,7 +26,7 @@ public class HSH {
        HLANG.Compiler(stuff, new HashMap<>(), new Stack<>(), new HashMap<>(), new Stack<>());
     }
     //public static void main(String[] args) throws FileNotFoundException, Exception {
-      //  String stuff = readFromFile("getindex.hlang");
-      //  HLANG.Compiler(stuff, new HashMap<>(), new Stack<>(), new HashMap<>(), new Stack<>());
+        //String stuff = readFromFile("./getindex.hlang");
+        //HLANG.Compiler(stuff, new HashMap<>(), new Stack<>(), new HashMap<>(), new Stack<>());
     //}
 }

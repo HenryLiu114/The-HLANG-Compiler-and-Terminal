@@ -1,0 +1,205 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55px;
+    background: white;
+    border: 2px solid black;
+    font-family: "Sansation", sans-serif;
+}
+
+.homebutton {
+    height: 50px;
+    cursor: pointer;
+}
+
+.selectionbuttons {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.tabbutton{
+    height: 50px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Sansation", sans-serif;
+    position: relative;
+}
+
+.header1{
+    font-size: 80px;
+    text-align: center;
+    padding-top: 70px;
+}
+
+.header2{
+    width: 100%;
+    font-size: 40px;
+    text-align: left;
+}
+
+.header3{
+    font-size: 25px;
+    width: 100%;
+    text-indent: 20px;
+}
+
+.line {
+    width: 90%;
+    border: none;
+    height: 2px;
+    margin: 20px auto;
+    background-color: black;
+}
+
+.options{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 40px;
+    gap: 40px;
+}
+
+.optionbox{
+    display: flex;
+    width: 220px;
+    height: 300px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.5s ease;
+    border-radius: 10px;
+    gap: 10px;
+}
+
+
+.optionimg{
+    width: 120px;
+    height: 120px;
+}
+
+.windowsbutton{
+    background-color: rgb(0, 175, 254);
+
+    width: 180px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+    justify-content: center;    /* horizontal centering */
+    align-items: center;
+}
+
+.windowsbutton:hover{
+    background-color: rgb(0, 98, 143);
+}
+
+.buttontext{
+    color: white;
+    padding: 10px;
+}
+
+.desbianbutton{
+    background-color: rgb(215, 7, 81);
+
+    width: 180px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+    justify-content: center;    /* horizontal centering */
+    align-items: center;
+}
+
+.desbianbutton:hover{
+    background-color: rgb(112, 0, 39);
+}
+
+.rhbutton{
+    background-color: rgb(238, 0, 0);
+
+    width: 180px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+    justify-content: center;    /* horizontal centering */
+    align-items: center;
+}
+
+.rhbutton:hover{
+    background-color: rgb(141, 0, 0);
+}
+
+.albutton{
+    background-color: rgb(62, 165, 217);
+
+    width: 180px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+    justify-content: center;    /* horizontal centering */
+    align-items: center;
+}
+
+.albutton:hover{
+    background-color: rgb(37, 106, 141);
+}
+
+.macbutton{
+    background-color: rgb(170, 170, 170);
+
+    width: 180px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+    justify-content: center;    /* horizontal centering */
+    align-items: center;
+}
+
+.macbutton:hover{
+    background-color: rgb(110, 110, 110);
+}
+
+@font-face {
+    font-family: "Sansation";
+    src: url("../fonts/Sansation-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Sansation-Bold";
+    src: url("../fonts/Sansation-Regular.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}

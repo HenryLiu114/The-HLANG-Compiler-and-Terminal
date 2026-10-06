@@ -5,8 +5,8 @@ function navbar(){
         <a href="./downloadpage/index.html" class="selectionbuttons">Downloads</a>
         <a href="./changelogpage/index.html" class="selectionbuttons">Changelog</a>
         <div class="selectionbuttons">Manuals</div>
-        <div class="selectionbuttons">About</div>
-        <div class="selectionbuttons">Github</div>
+        <a href="./aboutpage/index.html" class="selectionbuttons">About</a>
+        <a href="https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal" class="selectionbuttons">Github</a>
         <img class="tabbutton" src="imgs/bars-solid-full.svg">
     </div>
     `;

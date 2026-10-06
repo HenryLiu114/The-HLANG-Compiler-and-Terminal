@@ -15,6 +15,10 @@
         </div>
         <div class="table">
             <div id="Header"></div>
+            <div id="v2_2_3"></div>
+            <div id="v2_2_2"></div>
+            <div id="v2_2_1"></div>
+            <div id="v2_2_0"></div>
             <div id="v2_1"></div>
             <div id="v2_0_3"></div>
             <div id="v2_0_2"></div>
@@ -45,6 +49,10 @@
             <script>
                 document.getElementById("navbar").innerHTML = navbar();
                 document.getElementById("Header").innerHTML = addrow("Version","Date", "Description");
+                document.getElementById("v2_2_3").innerHTML = addrow("v2.2.3","Sep 24, 2026", "Added /copyl which makes a new copy of a list.");
+                document.getElementById("v2_2_2").innerHTML = addrow("v2.2.2","Sep 9, 2026", "Added the return stack a global lambda variable stack. To add stuff to it /ret with a data point. To take out the first entry /rel.");
+                document.getElementById("v2_2_1").innerHTML = addrow("v2.2.1","Aug 31, 2026", "Changed the syntax for floating point numbers to '_'.");
+                document.getElementById("v2_2_0").innerHTML = addrow("v2.2.0","Aug 28, 2026", "Added String Functions and Ways to add stuff to lists.");
                 document.getElementById("v2_1").innerHTML = addrow("v2.1","June 4, 2026", "Doesn't require you to install java anymore.");
                 document.getElementById("v2_0_3").innerHTML = addrow("v2.0.3","June 4, 2026", "Added Commands to help create and edit HLANG files (callo and eallo).");
                 document.getElementById("v2_0_2").innerHTML = addrow("v2.0.2","June 3, 2026", "Removed Developer Mode.");

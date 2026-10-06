@@ -7,6 +7,85 @@
 </head>
 
 <body>
+    <link rel="stylesheet" href="styles.css">
+
+    <div class="page">
+        <div class="header1">
+            About
+        </div>
+
+        <div class="pageFormat">
+            <div class="formattedBox">
+                <img class="formattedImg" src="../imgs/henryslinkedin.png">
+                <div class="formattedTitle">About the Creator</div>
+                <div class="formattedText">
+                    Henry's Language (HLANG) is a Functional Programming Language
+                    developed and created by Computer Science Undergratate, Henry Liu,
+                    at California State Polytechnic University, Pomona.
+                </div>
+            </div>
+
+            <div class="formattedBox">
+                <img class="formattedImg" src="../imgs/SimpleLogo.png">
+                <div class="formattedTitle">Purpose</div>
+                <div class="formattedText">
+                    HLANG's purpose is to simulate universal variables (called tokens),
+                    manage and navigate SQL databases, and provide coding confort in managing
+                    code.
+                </div>
+            </div>
+
+
+            <div class="formattedBox">
+                <img class="formattedImg" src="../imgs/hlangexamplecode.png">
+                <div class="formattedTitle">Structure</div>
+                <div class="formattedText">
+                    Each '/' denotes a command, and each value is defined as a token. 
+                    Variables are stored in a token map, where those tokens can easily be 
+                    called from.
+                </div>
+            </div>
+
+            <div class="formattedBox">
+                <img class="formattedImg" src="../imgs/hlangtokestructure.png">
+                <div class="formattedTitle">Token Types</div>
+                <div class="formattedText">
+                    A token can be a list, a string, an integer, it is a completly
+                    wildcard type. With this HLANG can perform functions with different " token types",
+                    and make assumptions based on the data.
+                </div>
+            </div>
+
+            <div class="formattedBox">
+                <img class="formattedImg" src="../imgs/interpret.png">
+                <div class="formattedTitle">Interpreter</div>
+                <div class="formattedText">
+                    HLANG at the moment is an interpreted language, where the interpreter uses the Java
+                    Virual Machine. HLANG uses a stack, while also using a parse tree to interpret
+                    and insert into the stack.
+                </div>
+            </div>
+
+            <div class="formattedBox">
+                <img class="formattedImg" src="../imgs/github.png">
+                <div class="formattedTitle">HLANG's Future</div>
+                <div class="formattedText">
+                    Currently, HLANG 1 has been discontinued due to design issues, but HLANG 2 still functions
+                    and is still being updated to this day, with many plans to come in the future.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="navbar"></div>
+    <script src="script.js"></script>
+
+    <script>
+        document.getElementById("navbar").innerHTML = navbar();
+    </script>
+    </div>
+
+
+
 
 </body>
 

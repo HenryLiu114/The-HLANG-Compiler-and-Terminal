@@ -12,16 +12,3 @@ function navbar() {
     `;
 }
 
-function addrow(ver, date, desc) {
-    return `<div class="row">
-                <div class="cellVer">
-                    ${ver}
-                </div>
-                <div class="cellDate">
-                    ${date}
-                </div>
-                <div class="cellDesc">
-                    ${desc}
-                </div>
-            </div>`;
-}

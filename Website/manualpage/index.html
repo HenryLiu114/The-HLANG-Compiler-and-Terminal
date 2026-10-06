@@ -3,11 +3,68 @@
 
 <head>
     <link rel="icon" type="image/png" href="../imgs/SimpleLogo.png">
-    <title>Manuals</title>
+    <title>Downloads</title>
 </head>
 
 <body>
-    
+    <link rel="stylesheet" href="styles.css">
+    <div class="page">
+        <div class="header1">Manuals</div>
+        <div class="header2">1. The Token Type</div>
+        <div class="header3">Integers and Floats</div>
+        <div class="header3">Booleans</div>
+        <div class="header3">String Literals</div>
+        <div class="header3">List</div>
+        <div class="header3">Wildcards</div>
+
+        <div class="header2">2. Commands</div>
+        <div class="header3">Declaring a Command</div>
+        <div class="header3">Syntax Rules</div>
+
+        <div class="header2">3. Arithmetics</div>
+        <div class="header3">Add, Subtract, Multiply, Divide, and Modulus</div>
+        <div class="header3">Float and Integer Cases</div>
+
+        <div class="header2">4. Logic</div>
+        <div class="header3">Basic Operators</div>
+
+        <div class="header2">5. Variables</div>
+        <div class="header3">Making variables</div>
+        <div class="header3">Using variables</div>
+
+        <div class="header2">6. Functions</div>
+        <div class="header3">Making Functions</div>
+        <div class="header3">Using Functions</div>
+
+        <div class="header2">7. String Functions</div>
+        <div class="header3">/add String Integer (or Float)</div>
+        <div class="header3">/add String String</div>
+        <div class="header3">/sub String Integer</div>
+        <div class="header3">/sub Integer String</div>
+        <div class="header3">/mul String Integer</div>
+        <div class="header3">/mul Integer String</div>
+        <div class="header3">/mul String String</div>
+        <div class="header3">/mul String Wildcard</div>
+        <div class="header3">/div String Integer</div>
+        <div class="header3">/div Integer String</div>
+        <div class="header3">/div String String</div>
+        <div class="header3">Logic with Strings</div>
+        
+        <div class="header2">8. List Functions</div>
+        <div class="header3">Introduction to Lists</div>
+        <div class="header3">/add List List</div>
+        <div class="header3">/add List Tokens that are not Lists</div>
+        <div class="header3">Copying Lists</div>
+        <div class="header3">Logic with Lists</div>
+
+        <div class="header2">9. CSV Functionality (NOT IMPLEMENTED)</div>
+    </div>
+    <div id="navbar"></div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById("navbar").innerHTML = navbar();
+    </script>
 </body>
 
 </html>

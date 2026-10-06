@@ -1,4 +1,4 @@
-# HLANG Version 2.2.2 FULL RELEASE
+# HLANG Version 2.2.3 FULL RELEASE
 A open source java based shell created by yours truly.
 
 This repo also comes in with a built in programming language called "HLANG" (Henry's Language).
@@ -16,7 +16,7 @@ This repo will have a built in shell called "HSh" or Henry's Shell for short.
 # Installation
 | Release | HLANG Version | Source |
 |---------|------|---------|
-| Windows | v2.2.2 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.2.2) |
+| Windows | v2.2.3 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.2.2) |
 | Debian Linux | v2.1 | [HLANG Installation Debian Linux](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Ubuntu_Debian_Release_2.1) |
 | Red Hat | N/A | N/A |
 | Arch Linux | N/A | N/A |
@@ -49,6 +49,7 @@ To run any hlang file, type:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
+| Web1.1 | Oct 6, 2026 | Updated the website to the newest version of HLANG. |
 | v2.2.3 | Sep 24, 2026 | Added /copyl which makes a new copy of a list. |
 | Web1.0 | Sep 12, 2026 | Deployed the First Version of the Website. Check: https://henryslanguage.com/ |
 | v2.2.2 | Sep 9, 2026 | Added the return stack a global lambda variable stack. To add stuff to it /ret with a data point. To take out the first entry /rel. |

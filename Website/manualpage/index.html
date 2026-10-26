@@ -3,20 +3,47 @@
 
 <head>
     <link rel="icon" type="image/png" href="../imgs/SimpleLogo.png">
-    <title>Downloads</title>
+    <title>Manual</title>
 </head>
 
 <body>
     <link rel="stylesheet" href="styles.css">
     <div class="page">
-        <div class="header1">Being Updated</div>
-        <div class="dropdown" id="structure"></div>
+        <div class="header1">Manuals</div>
+        <div class="textstuff">Learn about HLANG Here! Click on the arrows to learn the features.</div>
+        <div class="header2">
+            Reserved Words
+            <div id="dropdownBtn1" class="dropdownbtn">
+                <img src="../imgs/chevron-down-solid-full.svg">
+            </div>
+        </div>
+        <div class = "dropdown" id="reservedwords"></div>
+
+        <div class="header2">
+            Syntax, Semantics, and Token Types
+            <div id="dropdownbtn2" class="dropdownbtn2">
+                <img src="../imgs/chevron-down-solid-full.svg">
+            </div>
+        </div>
+        <div class = "dropdown2" id="syntaxstuff"></div>
+
+        <div class="header2">
+            Special Arithmetic Cases
+            <div id="dropdownbtn3" class="dropdownbtn3">
+                <img src="../imgs/chevron-down-solid-full.svg">
+            </div>
+        </div>
+        <div class = "dropdown3" id="specialcases"></div>
     </div>
     <div id="navbar"></div>
+    
 
     <script src="script.js"></script>
     <script>
         document.getElementById("navbar").innerHTML = navbar();
+        document.getElementById("reservedwords").innerHTML = reservedWords();
+        document.getElementById("syntaxstuff").innerHTML = syntaxstuff();
+        document.getElementById("specialcases").innerHTML = specialcases();
     </script>
 </body>
 

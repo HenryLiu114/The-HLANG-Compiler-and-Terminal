@@ -23,7 +23,7 @@
 }
 
 
-.tabbutton{
+.tabbutton {
     height: 50px;
     margin-left: auto;
     cursor: pointer;
@@ -38,22 +38,49 @@
     position: relative;
 }
 
-.header1{
-    font-size: 80px;
+.header1 {
+    font-size: 60px;
     text-align: center;
     padding-top: 70px;
 }
 
-.header2{
-    width: 100%;
-    font-size: 40px;
-    text-align: left;
+.textstuff{
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 20px;
 }
 
-.header3{
-    font-size: 25px;
+.header2 {
+    width: 100%;
+    font-size: 30px;
+    text-align: left;
+    border: black solid 2px;
+    border-radius: 2vh;
+    text-indent: 10px;
+    display: flex;
+}
+
+.header3 {
+    font-size: 20px;
     width: 100%;
     text-indent: 20px;
+    font-weight: bold;
+    display: flex;
+}
+
+.header4 {
+    font-size: 17.5px;
+    width: 100%;
+    text-indent: 30px;
+    font-weight: 550;
+}
+
+.header5 {
+    font-size: 15px;
+    width: 100%;
+    text-indent: 30px;
+    padding-bottom: 5px;
+    font-style: italic;
 }
 
 .line {
@@ -64,7 +91,7 @@
     background-color: black;
 }
 
-.options{
+.options {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -72,7 +99,7 @@
     gap: 40px;
 }
 
-.optionbox{
+.optionbox {
     display: flex;
     width: 220px;
     height: 300px;
@@ -90,12 +117,12 @@
 }
 
 
-.optionimg{
+.optionimg {
     width: 120px;
     height: 120px;
 }
 
-.windowsbutton{
+.windowsbutton {
     background-color: rgb(0, 175, 254);
 
     width: 180px;
@@ -105,20 +132,21 @@
     text-align: center;
     text-decoration: none;
     transition: background-color 0.5s ease;
-    justify-content: center;    /* horizontal centering */
+    justify-content: center;
+    /* horizontal centering */
     align-items: center;
 }
 
-.windowsbutton:hover{
+.windowsbutton:hover {
     background-color: rgb(0, 98, 143);
 }
 
-.buttontext{
+.buttontext {
     color: white;
     padding: 10px;
 }
 
-.desbianbutton{
+.desbianbutton {
     background-color: rgb(215, 7, 81);
 
     width: 180px;
@@ -128,15 +156,16 @@
     text-align: center;
     text-decoration: none;
     transition: background-color 0.5s ease;
-    justify-content: center;    /* horizontal centering */
+    justify-content: center;
+    /* horizontal centering */
     align-items: center;
 }
 
-.desbianbutton:hover{
+.desbianbutton:hover {
     background-color: rgb(112, 0, 39);
 }
 
-.rhbutton{
+.rhbutton {
     background-color: rgb(238, 0, 0);
 
     width: 180px;
@@ -146,15 +175,16 @@
     text-align: center;
     text-decoration: none;
     transition: background-color 0.5s ease;
-    justify-content: center;    /* horizontal centering */
+    justify-content: center;
+    /* horizontal centering */
     align-items: center;
 }
 
-.rhbutton:hover{
+.rhbutton:hover {
     background-color: rgb(141, 0, 0);
 }
 
-.albutton{
+.albutton {
     background-color: rgb(62, 165, 217);
 
     width: 180px;
@@ -164,15 +194,16 @@
     text-align: center;
     text-decoration: none;
     transition: background-color 0.5s ease;
-    justify-content: center;    /* horizontal centering */
+    justify-content: center;
+    /* horizontal centering */
     align-items: center;
 }
 
-.albutton:hover{
+.albutton:hover {
     background-color: rgb(37, 106, 141);
 }
 
-.macbutton{
+.macbutton {
     background-color: rgb(170, 170, 170);
 
     width: 180px;
@@ -182,16 +213,13 @@
     text-align: center;
     text-decoration: none;
     transition: background-color 0.5s ease;
-    justify-content: center;    /* horizontal centering */
+    justify-content: center;
+    /* horizontal centering */
     align-items: center;
 }
 
-.macbutton:hover{
+.macbutton:hover {
     background-color: rgb(110, 110, 110);
-}
-
-.dropdown {
-    
 }
 
 @font-face {
@@ -206,4 +234,112 @@
     src: url("../fonts/Sansation-Regular.ttf") format("truetype");
     font-weight: 300;
     font-style: normal;
+}
+
+.dropdown {
+    width: 100%;
+    border: black solid 2px;
+    border-radius: 2vh;
+    margin-top: 10px;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+
+    transition: max-height 0.4s ease, opacity 0.3s ease, visibility 0.4s;
+}
+
+.dropdown.show {
+    max-height: 400px;
+    opacity: 1;
+    visibility: visible;
+    overflow-y: auto;
+
+}
+
+.dropdownbtn {
+    width: 20px;
+    height: 20px;
+}
+
+.dropdownbtn img {
+    transition: rotate 0.3s ease;
+}
+
+.dropdownbtn.show img {
+    rotate: 180deg;
+}
+
+.innerdropdown {
+    width: 100%;
+    border-radius: 2vh;
+    padding-bottom: 10px;
+}
+
+.dropdown2 {
+    width: 100%;
+    border: black solid 2px;
+    border-radius: 2vh;
+    margin-top: 10px;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+
+    transition: max-height 0.4s ease, opacity 0.3s ease, visibility 0.4s;
+}
+
+.dropdown2.show {
+    max-height: 400px;
+    opacity: 1;
+    visibility: visible;
+    overflow-y: auto;
+
+}
+
+.dropdownbtn2 {
+    width: 20px;
+    height: 20px;
+}
+
+.dropdownbtn2 img {
+    transition: rotate 0.3s ease;
+}
+
+.dropdownbtn2.show img {
+    rotate: 180deg;
+}
+
+.dropdown3 {
+    width: 100%;
+    border: black solid 2px;
+    border-radius: 2vh;
+    margin-top: 10px;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+
+    transition: max-height 0.4s ease, opacity 0.3s ease, visibility 0.4s;
+}
+
+.dropdown3.show {
+    max-height: 400px;
+    opacity: 1;
+    visibility: visible;
+    overflow-y: auto;
+
+}
+
+.dropdownbtn3 {
+    width: 20px;
+    height: 20px;
+}
+
+.dropdownbtn3 img {
+    transition: rotate 0.3s ease;
+}
+
+.dropdownbtn3.show img {
+    rotate: 180deg;
 }

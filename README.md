@@ -57,7 +57,7 @@ To edit a hlang file:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
-| Web1.1 | Oct 26, 2026 | Updated the website to the newest version of HLANG. |
+| Web1.3 | Oct 26, 2026 | Updated the website to the newest version of HLANG. |
 | v2.3.1 | Oct 26, 2026 | /mul infinite loop bug fixes. Move list intersection to /mod. |
 | Web1.2 | Oct 23, 2026 | Updated the website to the newest version of HLANG. |
 | v2.3.0 | Oct 23, 2026 | /prompt bug fixes. String and List functionality. See releases for more details. |

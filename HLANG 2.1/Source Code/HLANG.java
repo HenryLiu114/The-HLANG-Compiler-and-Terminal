@@ -698,134 +698,34 @@ public class HLANG {
                             } else if (X1.type == TokenType.wildcard && (X2.type == TokenType.wildcard
                                     || X2.type == TokenType.str)) {
                                 throw new Exception("Infinity Error");
-                            } else if (X1.type == TokenType.list && X2.type == TokenType.list) {
-                                @SuppressWarnings("unchecked")
-                                LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
-                                @SuppressWarnings("unchecked")
-                                LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
-                                LinkedList<Token<?>> res = new LinkedList<>();
-                                int i = 0;
-                                while (!v2.isEmpty() && i < v1.size()) {
-                                    int j = 0;
-                                    while (j < v2.size()) {
-                                        if (v1.get(i).equals(v2.get(j))) {
-                                            res.add(v2.get(j));
-                                            v2.remove(j);
-                                            j--;
-                                        }
-                                        j++;
-                                    }
-                                    i++;
-                                }
-                                ValStack.push(new Token<>(res, TokenType.list));
                             } else if (X1.type == TokenType.list) {
                                 @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
-                                if (X2.type == TokenType.integer) {
-                                    boolean hasFound = false;
-                                    int i = 0;
-                                    int og = (int) X2.data;
-                                    while (!hasFound && i < v1.size()) {
-                                        if (v1.get(i).type == TokenType.integer) {
-                                            int compare = (int) v1.get(i).data;
-                                            if (compare == og) {
-                                                hasFound = true;
-                                            }
-                                        } else {
-                                            i++;
-                                        }
+                                
+                                Token<?> v2 = X2;
+                                int i = 0;
+                                boolean hasFound = false;
+                                while (!hasFound && i < v1.size()) {
+                                    if(v1.get(i).equals(v2)){
+                                        hasFound = true;
                                     }
-                                    ValStack.push(new Token<>(i, TokenType.integer));
-                                } else if (X2.type == TokenType.floating) {
-                                    boolean hasFound = false;
-                                    int i = 0;
-                                    double og = (double) X2.data;
-                                    while (!hasFound && i < v1.size()) {
-                                        if (v1.get(i).type == TokenType.floating) {
-                                            double compare = (double) v1.get(i).data;
-                                            if (compare == og) {
-                                                hasFound = true;
-                                            }
-                                        } else {
-                                            i++;
-                                        }
-                                    }
-                                    ValStack.push(new Token<>(i, TokenType.integer));
-                                } else if (X2.type == TokenType.str) {
-                                    boolean hasFound = false;
-                                    int i = 0;
-                                    String og = (String) X2.data;
-                                    while (!hasFound && i < v1.size()) {
-                                        if (v1.get(i).type == TokenType.str) {
-                                            String compare = (String) v1.get(i).data;
-                                            if (compare.equals(og)) {
-                                                hasFound = true;
-                                            }
-                                        } else {
-                                            i++;
-                                        }
-                                    }
-                                    ValStack.push(new Token<>(i, TokenType.integer));
-                                } else if (X1.type == TokenType.bool) {
-                                    ValStack.push(new Token<>(v1.isEmpty(), TokenType.bool));
-                                } else if (X1.type == TokenType.wildcard) {
-                                    ValStack.push(new Token<>(v1.size(), TokenType.bool));
+                                    i++;
                                 }
+                                ValStack.push(new Token<>(i, TokenType.integer));
                             } else if (X2.type == TokenType.list) {
                                 @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X2.data;
-                                if (X1.type == TokenType.integer) {
-                                    boolean hasFound = false;
-                                    int i = 0;
-                                    int og = (int) X1.data;
-                                    while (!hasFound && i < v1.size()) {
-                                        if (v1.get(i).type == TokenType.integer) {
-                                            int compare = (int) v1.get(i).data;
-                                            if (compare == og) {
-                                                hasFound = true;
-                                            }
-                                        } else {
-                                            i++;
-                                        }
+                                
+                                Token<?> v2 = X1;
+                                int i = 0;
+                                boolean hasFound = false;
+                                while (!hasFound && i < v1.size()) {
+                                    if(v1.get(i).equals(v2)){
+                                        hasFound = true;
                                     }
-                                    ValStack.push(new Token<>(hasFound, TokenType.bool));
-                                } else if (X1.type == TokenType.floating) {
-                                    boolean hasFound = false;
-                                    int i = 0;
-                                    double og = (double) X1.data;
-                                    while (!hasFound && i < v1.size()) {
-                                        if (v1.get(i).type == TokenType.floating) {
-                                            double compare = (double) v1.get(i).data;
-                                            if (compare == og) {
-                                                hasFound = true;
-                                            }
-                                        } else {
-                                            i++;
-                                        }
-                                    }
-                                    ValStack.push(new Token<>(hasFound, TokenType.bool));
-                                } else if (X1.type == TokenType.str) {
-                                    boolean hasFound = false;
-                                    int i = 0;
-                                    String og = (String) X1.data;
-                                    while (!hasFound && i < v1.size()) {
-                                        if (v1.get(i).type == TokenType.str) {
-                                            String compare = (String) v1.get(i).data;
-                                            if (compare.equals(og)) {
-                                                hasFound = true;
-                                            }
-                                        } else {
-                                            i++;
-                                        }
-                                    }
-                                    ValStack.push(new Token<>(hasFound, TokenType.bool));
-                                } else if (X1.type == TokenType.bool) {
-                                    ValStack.push(new Token<>(v1.isEmpty(), TokenType.bool));
-                                } else if (X1.type == TokenType.wildcard) {
-                                    throw new Exception("Infinity Error");
-                                } else {
-                                    throw new Exception("Cannot Compile: Multiplication Type Error!");
+                                    i++;
                                 }
+                                ValStack.push(new Token<>(hasFound, TokenType.bool));
                             } else {
                                 throw new Exception("Cannot Compile: Multiplication Type Error!");
                             }
@@ -917,7 +817,29 @@ public class HLANG {
                                 int v2 = (Integer) X2.data;
 
                                 ValStack.push(new Token<>(v1 % v2, TokenType.integer));
-                            } else {
+                            } 
+                            else if (X1.type == TokenType.list && X2.type == TokenType.list) {
+                                @SuppressWarnings("unchecked")
+                                LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
+                                @SuppressWarnings("unchecked")
+                                LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
+                                LinkedList<Token<?>> res = new LinkedList<>();
+                                int i = 0;
+                                while (!v2.isEmpty() && i < v1.size()) {
+                                    int j = 0;
+                                    while (j < v2.size()) {
+                                        if (v1.get(i).equals(v2.get(j))) {
+                                            res.add(v2.get(j));
+                                            v2.remove(j);
+                                            j--;
+                                        }
+                                        j++;
+                                    }
+                                    i++;
+                                }
+                                ValStack.push(new Token<>(res, TokenType.list));
+                            }
+                            else {
                                 throw new Exception("Cannot Compile: Modulus Type Error!");
                             }
                             break;

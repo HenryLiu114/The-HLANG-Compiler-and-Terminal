@@ -190,6 +190,10 @@
     background-color: rgb(110, 110, 110);
 }
 
+.dropdown {
+    
+}
+
 @font-face {
     font-family: "Sansation";
     src: url("../fonts/Sansation-Light.ttf") format("truetype");

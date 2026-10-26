@@ -1,1 +1,1 @@
-/print /add 10_1 10_1.
+/print /mul 2 [1,2,3,4,5,"Heheheha",[1,2,3]]. 

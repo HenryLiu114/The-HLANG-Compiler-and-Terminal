@@ -21,12 +21,12 @@ public class HSH {
         return res.toString();
     }
 
-    //public static void main(String[] args) throws FileNotFoundException, Exception {
-      // String stuff = readFromFile(args[0]);
-      // HLANG.Compiler(stuff, new HashMap<>(), new Stack<>(), new HashMap<>(), new Stack<>());
-    //}
     public static void main(String[] args) throws FileNotFoundException, Exception {
-        String stuff = readFromFile("./getindex.hlang");
+        String stuff = readFromFile(args[0]);
         HLANG.Compiler(stuff, new HashMap<>(), new Stack<>(), new HashMap<>(), new Stack<>());
     }
+    //public static void main(String[] args) throws FileNotFoundException, Exception {
+        //String stuff = readFromFile("./getindex.hlang");
+        //HLANG.Compiler(stuff, new HashMap<>(), new Stack<>(), new HashMap<>(), new Stack<>());
+    //}
 }

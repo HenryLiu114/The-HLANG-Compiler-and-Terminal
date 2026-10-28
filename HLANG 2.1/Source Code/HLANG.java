@@ -36,6 +36,9 @@ public class HLANG {
         returnto,
         releaseto,
         copyl,
+        While,
+        For,
+        comment,
         // Data Types
         integer,
         floating,
@@ -212,7 +215,9 @@ public class HLANG {
                         case '\\':
                             cur += curChar;
                             break;
-
+                        case '#':
+                            cur += curChar;
+                            break;
                         default:
                             break;
                     }
@@ -352,6 +357,12 @@ public class HLANG {
                     case "/copyl":
                         lexedList.add(new Token<String>(curStr, TokenType.copyl));
                         break;
+                    case "/while":
+                        lexedList.add(new Token<String>(curStr, TokenType.While));
+                        break;
+                    case "/for":
+                        lexedList.add(new Token<String>(curStr, TokenType.For));
+                        break;
                     default:
                         lexedList.add(new Token<String>(curStr, TokenType.var));
                         break;
@@ -456,7 +467,7 @@ public class HLANG {
         switch (cur.type) {
             case TokenType.arithmetic, TokenType.vardec, TokenType.logical, TokenType.conditional, TokenType.functdec,
                     TokenType.listdec, TokenType.cons, TokenType.car, TokenType.cdr, TokenType.input, TokenType.mapcar,
-                    TokenType.copyl:
+                    TokenType.copyl, TokenType.While:
                 childrenCount = 2;
                 break;
             case TokenType.singleArith, TokenType.logicalnot, TokenType.output, TokenType.listlogic, TokenType.returnto,
@@ -465,6 +476,9 @@ public class HLANG {
                 break;
             case TokenType.ifstmt, TokenType.functcreate:
                 childrenCount = 3;
+                break;
+            case TokenType.For:
+                childrenCount = 5;
                 break;
             default:
                 childrenCount = 0;
@@ -505,6 +519,7 @@ public class HLANG {
         return res;
     }
 
+    @SuppressWarnings("unchecked")
     private static void SingleLineCompiler(String cmd, HashMap<String, Token<?>> variables, Stack<Token<?>> ValStack,
             HashMap<String, HLangFunct> functions, Stack<Token<?>> returnStack)
             throws Exception {
@@ -577,19 +592,15 @@ public class HLANG {
                                     ValStack.push(new Token<>(v1 + v2, TokenType.str));
                                 }
                             } else if (X1.type == TokenType.list && X2.type == TokenType.list) {
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
                                 v1.addAll(v2);
                                 ValStack.push(new Token<>(v1, TokenType.list));
                             } else if (X1.type == TokenType.list) {
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
                                 v1.addLast(X2);
                                 ValStack.push(new Token<>(v1, TokenType.list));
                             } else if (X2.type == TokenType.list) {
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
                                 v2.addFirst(X1);
                                 ValStack.push(new Token<>(v2, TokenType.list));
@@ -630,13 +641,11 @@ public class HLANG {
                                 int v2 = (int) X1.data;
                                 ValStack.push(new Token<>(v1.charAt(v2) + "", TokenType.str));
                             } else if (X1.type == TokenType.list && X2.type == TokenType.integer) {
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
                                 int v2 = (int) X2.data;
                                 v1.remove(v2);
                                 ValStack.push(new Token<>(v1, TokenType.list));
                             } else if (X1.type == TokenType.integer && X2.type == TokenType.list) {
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X2.data;
                                 int v2 = (int) X1.data;
                                 ValStack.push(new Token<>(v1.remove(v2), TokenType.integer));
@@ -699,28 +708,26 @@ public class HLANG {
                                     || X2.type == TokenType.str)) {
                                 throw new Exception("Infinity Error");
                             } else if (X1.type == TokenType.list) {
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
-                                
+
                                 Token<?> v2 = X2;
                                 int i = 0;
                                 boolean hasFound = false;
                                 while (!hasFound && i < v1.size()) {
-                                    if(v1.get(i).equals(v2)){
+                                    if (v1.get(i).equals(v2)) {
                                         hasFound = true;
                                     }
                                     i++;
                                 }
                                 ValStack.push(new Token<>(i, TokenType.integer));
                             } else if (X2.type == TokenType.list) {
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X2.data;
-                                
+
                                 Token<?> v2 = X1;
                                 int i = 0;
                                 boolean hasFound = false;
                                 while (!hasFound && i < v1.size()) {
-                                    if(v1.get(i).equals(v2)){
+                                    if (v1.get(i).equals(v2)) {
                                         hasFound = true;
                                     }
                                     i++;
@@ -769,9 +776,7 @@ public class HLANG {
 
                                 ValStack.push(new Token<>(v1.replaceAll(v2, ""), TokenType.str));
                             } else if (X1.type == TokenType.list && X2.type == TokenType.list) {
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
                                 LinkedList<Token<?>> res = new LinkedList<>();
 
@@ -790,22 +795,50 @@ public class HLANG {
                                 }
 
                                 v1.addAll(v2);
-                                for(i = 0; i < v1.size(); i++){
+                                for (i = 0; i < v1.size(); i++) {
                                     int j = 0;
                                     boolean hasFound = false;
-                                    while(!hasFound && j < res.size()){
-                                        if(v1.get(i).equals(res.get(j))){
+                                    while (!hasFound && j < res.size()) {
+                                        if (v1.get(i).equals(res.get(j))) {
                                             v1.remove(i);
                                             hasFound = true;
                                         }
                                         j++;
                                     }
-                                    if(hasFound){
+                                    if (hasFound) {
                                         i--;
                                     }
                                 }
                                 ValStack.push(new Token<>(v1, TokenType.list));
-                            } else {
+                            } 
+                            else if (X1.type == TokenType.integer && X2.type == TokenType.list){
+                                int v1 = (int) X1.data;
+                                LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
+                                Token<?> res = v2.get(v1);
+                                TokenType type = res.type;
+                                switch(type){
+                                    case TokenType.integer:
+                                        ValStack.push(new Token<>((int) res.data, TokenType.integer));
+                                        break;
+                                    case TokenType.floating:
+                                        ValStack.push(new Token<>((double) res.data, TokenType.floating));
+                                        break;
+                                    case TokenType.str:
+                                        ValStack.push(new Token<>((String) res.data, TokenType.str));
+                                        break;
+                                    case TokenType.bool:
+                                        ValStack.push(new Token<>((boolean) res.data, TokenType.bool));
+                                        break;
+                                    case TokenType.list:
+                                        ValStack.push(new Token<>((LinkedList<Token<?>>) res.data, TokenType.list));
+                                        break;
+                                    default:
+                                        break;
+                                    
+                                }
+
+                            }
+                            else {
                                 throw new Exception("Cannot Compile: Division Type Error!");
                             }
                             break;
@@ -817,11 +850,8 @@ public class HLANG {
                                 int v2 = (Integer) X2.data;
 
                                 ValStack.push(new Token<>(v1 % v2, TokenType.integer));
-                            } 
-                            else if (X1.type == TokenType.list && X2.type == TokenType.list) {
-                                @SuppressWarnings("unchecked")
+                            } else if (X1.type == TokenType.list && X2.type == TokenType.list) {
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
-                                @SuppressWarnings("unchecked")
                                 LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
                                 LinkedList<Token<?>> res = new LinkedList<>();
                                 int i = 0;
@@ -838,8 +868,7 @@ public class HLANG {
                                     i++;
                                 }
                                 ValStack.push(new Token<>(res, TokenType.list));
-                            }
-                            else {
+                            } else {
                                 throw new Exception("Cannot Compile: Modulus Type Error!");
                             }
                             break;
@@ -1116,7 +1145,7 @@ public class HLANG {
                             X1 = ValStack.pop();
                             X2 = ValStack.pop();
                             ValStack.push(new Token<>(X1.equals(X2), TokenType.bool));
-                            
+
                             break;
                         case "/neq":
                             X1 = ValStack.pop();
@@ -1178,7 +1207,7 @@ public class HLANG {
                     Token<?> prog = ValStack.pop();
                     HLangFunct n = new HLangFunct((String) functName.data, prog);
                     String[] varNameList = ((String) varNames.data).trim().split("\\s+");
-                    ;
+
                     for (int i = 0; i < varNameList.length; i++) {
                         n.AddParam(varNameList[i]);
                     }
@@ -1206,7 +1235,6 @@ public class HLANG {
                     Token<?> item = ValStack.pop();
                     Token<?> listToken = variables.get((String) varname.data);
 
-                    @SuppressWarnings("unchecked")
                     LinkedList<Token<?>> lists = (LinkedList<Token<?>>) listToken.data;
 
                     lists.add(item);
@@ -1215,7 +1243,6 @@ public class HLANG {
                     varname = ValStack.pop();
                     Token<?> store = ValStack.pop();
                     listToken = variables.get((String) varname.data);
-                    @SuppressWarnings("unchecked")
                     LinkedList<Token<?>> listcar = (LinkedList<Token<?>>) listToken.data;
                     variables.put((String) store.data, listcar.getFirst());
                     break;
@@ -1223,7 +1250,6 @@ public class HLANG {
                     varname = ValStack.pop();
                     listToken = variables.get((String) varname.data);
                     store = ValStack.pop();
-                    @SuppressWarnings("unchecked")
                     LinkedList<Token<?>> original = (LinkedList<Token<?>>) listToken.data;
                     original.removeFirst();
                     variables.put((String) store.data, new Token<>(original, TokenType.list));
@@ -1231,7 +1257,6 @@ public class HLANG {
                 case TokenType.listlogic:
                     varname = ValStack.pop();
                     listToken = variables.get((String) varname.data);
-                    @SuppressWarnings("unchecked")
                     LinkedList<Token<?>> checklen = (LinkedList<Token<?>>) listToken.data;
                     ValStack.push(new Token<Boolean>(checklen.isEmpty(), TokenType.bool));
                     break;
@@ -1273,7 +1298,6 @@ public class HLANG {
                     break;
                 case TokenType.copyl:
                     Token<?> lit = ValStack.pop();
-                    @SuppressWarnings("unchecked")
                     LinkedList<Token<?>> listt = (LinkedList<Token<?>>) lit.data;
                     Token<?> newList = new Token<>(new LinkedList<Token<?>>(listt), TokenType.list);
                     Token<?> var = ValStack.pop();
@@ -1282,6 +1306,39 @@ public class HLANG {
                     } else {
                         throw new Exception("Cannot Compile: Invaild Variable Name!");
                     }
+                    break;
+                case TokenType.While:
+                    Token<?> condi = ValStack.pop();
+                    Token<?> doStuff = ValStack.pop();
+                    Compiler((String) condi.data, variables, ValStack, functions, returnStack);
+                    condition = ValStack.pop();
+                    cond = (Boolean) condition.data;
+                
+                    while (cond) {
+                        Compiler((String) doStuff.data, variables, ValStack, functions, returnStack);
+                        Compiler((String) condi.data, variables, ValStack, functions, returnStack);
+                        condition = ValStack.pop();
+                        cond = (Boolean) condition.data;
+                    }
+                    break;
+                case TokenType.For:
+                    Token<?> iterable = ValStack.pop();
+                    Token<?> inital = ValStack.pop();
+                    Token<?> endstate = ValStack.pop();
+                    Token<?> increment = ValStack.pop();
+                    Token<?> stuffToDo = ValStack.pop();
+                    
+                    int init = (int) inital.data;
+                    int stop = (int) endstate.data;
+                    int incre = (int) increment.data;
+
+                    
+                    for(int i = init; i != stop; i+=incre){
+                        Token<?> token = new Token<>(i, TokenType.integer);
+                        variables.put((String) iterable.data, token);
+                        Compiler((String) stuffToDo.data, variables, ValStack, functions, returnStack);
+                    }
+                    
                     break;
                 default:
                     break;

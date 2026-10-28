@@ -1,0 +1,33 @@
+# Finds the largest Element
+/defun largestElement (lis) {
+    # Find Length
+    /var len /mul /lis /?.
+
+    # Setup iterable variable
+    /var i 0.
+
+    # Use a default number to compare to
+    /var largestNum -200000.
+
+    # Loop
+    /while (/lt /i /len) {
+        # Get the item at index
+        /var cur /div /i /lis.
+
+        # Check if the number is greater than largest num
+        /if (/gt /cur /largestNum) {/var largestNum /cur.}{}.
+
+        # Increment i
+        /var i /add /i 1.
+    }.
+
+    # Return Statement
+    /ret /largestNum.
+}.
+
+# Finds largest element with list
+/usefun largestElement ([1,2,3,4,5,6,1]).
+
+# Release and Print
+/rel x.
+/print /x.

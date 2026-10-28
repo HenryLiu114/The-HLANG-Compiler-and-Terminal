@@ -11,8 +11,7 @@ public class HSH {
 
         while (fc.hasNextLine()) {
             String cur = fc.nextLine().trim(); // removes tabs/spaces at start and end
-
-            if (!cur.isEmpty()) {
+            if (!cur.isEmpty() && cur.charAt(0) != '#') {
                 res.append(cur);
             }
         }

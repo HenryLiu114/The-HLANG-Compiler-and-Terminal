@@ -1,4 +1,4 @@
-# HLANG Version 2.3.1 FULL RELEASE
+# HLANG Version 2.4.0 FULL RELEASE
 A open source java based shell created by yours truly.
 
 This repo also comes in with a built in programming language called "HLANG" (Henry's Language).
@@ -16,7 +16,7 @@ This repo will have a built in shell called "HSh" or Henry's Shell for short.
 # Installation
 | Release | HLANG Version | Source |
 |---------|------|---------|
-| Windows | v2.3.1 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.2.2) |
+| Windows | v2.4.0 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.2.2) |
 | Debian Linux | v2.1 | [HLANG Installation Debian Linux](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Ubuntu_Debian_Release_2.1) |
 | Red Hat | N/A | N/A |
 | Arch Linux | N/A | N/A |
@@ -41,7 +41,7 @@ I promise the following for this new 2.0 version:
 Thank You for Understanding,
 Henry
 
-# HSh Version: 2.3.1
+# HSh Version: 2.4.0
 To run any hlang file, type:
 | hsh <filepath<awdsa>>.hlang |
 |-------------------|
@@ -57,6 +57,7 @@ To edit a hlang file:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
+| v2.4.0 | Oct 26, 2026 | The loops and comments update. |
 | Web1.4 | Oct 26, 2026 | Added Manuals Page to HLANG Website. |
 | Web1.3 | Oct 26, 2026 | Updated the website to the newest version of HLANG. |
 | v2.3.1 | Oct 26, 2026 | /mul infinite loop bug fixes. Move list intersection to /mod. |
@@ -98,7 +99,5 @@ To edit a hlang file:
 # Future Plans:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
-| Web1.0 | SOON | Online Compiler + Website |
-| Web1.1 | SOON | Offical Manual |
-| v2.3 | Soon | List Functionality. |
-| v2.4 | Soon | CSV Functionality. |
+| Web2.0 | SOON | Online Compiler |
+| v3.0 | Soon | CSV Functionality. |

@@ -106,4 +106,4 @@ To edit a hlang file:
 | v2.7 | 4 | CSV Functionality. |
 | Web2.0 | 5 | Online Compiler. |
 | ?? | 6 | HLANG Text Editor. |
-| v3.0 | 5 | HLANG Interpreter written in C not Java. |
+| v3.0 | 7 | HLANG Interpreter written in C not Java. |

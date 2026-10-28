@@ -98,7 +98,12 @@ To edit a hlang file:
 | v0 | Mar 24, 2026 | Date of Repo Creation. |
 
 # Future Plans:
-| HLANG Version | Date | Changes |
+| HLANG Version | Priority Ranking | Changes |
 |---------|------|---------|
-| Web2.0 | SOON | Online Compiler |
-| v3.0 | Soon | CSV Functionality. |
+| ?? | 1 | Other Distributions. |
+| v2.5 | 2 | Exception Handling. |
+| v2.6 | 3 | Input and Time. |
+| v2.7 | 4 | CSV Functionality. |
+| Web2.0 | 5 | Online Compiler. |
+| ?? | 6 | HLANG Text Editor. |
+| v3.0 | 5 | HLANG Interpreter written in C not Java. |

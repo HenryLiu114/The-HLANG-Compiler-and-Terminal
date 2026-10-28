@@ -57,6 +57,7 @@ To edit a hlang file:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
+| Web1.5 | Oct 26, 2026 | Updated the website to the newest version of HLANG. |
 | v2.4.0 | Oct 26, 2026 | The loops and comments update. |
 | Web1.4 | Oct 26, 2026 | Added Manuals Page to HLANG Website. |
 | Web1.3 | Oct 26, 2026 | Updated the website to the newest version of HLANG. |

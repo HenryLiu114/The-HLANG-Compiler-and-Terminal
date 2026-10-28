@@ -101,9 +101,8 @@ To edit a hlang file:
 | HLANG Version | Priority Ranking | Changes |
 |---------|------|---------|
 | ?? | 1 | Other Distributions. |
-| v2.5 | 2 | Exception Handling. |
-| v2.6 | 3 | Input and Time. |
-| v2.7 | 4 | CSV Functionality. |
-| Web2.0 | 5 | Online Compiler. |
-| ?? | 6 | HLANG Text Editor. |
-| v3.0 | 7 | HLANG Interpreter written in C not Java. |
+| v2.5 | 2 | CSV Functionality. |
+| v2.6 | 3 | Exceptions. |
+| Web2.0 | 4 | Online Compiler. |
+| ?? | 5 | HLANG Text Editor. |
+| v3.0 | 6 | HLANG Interpreter written in C not Java. |

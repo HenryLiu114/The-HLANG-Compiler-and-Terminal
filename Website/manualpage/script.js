@@ -50,7 +50,8 @@ function reservedWords() {
         "Input",
         "Mapcar",
         "Wildcard",
-        "Return Stack"
+        "Return Stack",
+        "Loops"
     ];
 
     h1 = [
@@ -90,6 +91,7 @@ function reservedWords() {
             "/gteq &lt;x1&gt; &lt;x2&gt;.",
             "/gt &lt;x1&gt; &lt;x2&gt;.",
             "/lteq &lt;x1&gt; &lt;x2&gt;.",
+            "/lt &lt;x1&gt; &lt;x2&gt;.",
             "/eq &lt;x1&gt; &lt;x2&gt;.",
             "/neq &lt;x1&gt; &lt;x2&gt;."
         ],
@@ -126,6 +128,12 @@ function reservedWords() {
         [
             "/ret &lt;data&gt;.",
             "/rel &lt;data&gt;."
+        ],
+
+        //Loops
+        [
+            "/while (&lt;condition&gt;) { &lt;todo&gt; }.",
+            "/for &lt;variableName&gt; &lt;startingPoint&gt; &lt;endingPoint&gt; &lt;incrementNumber&gt; { &lt;todo&gt; }."
         ]
     ];
 
@@ -231,7 +239,13 @@ function reservedWords() {
         "Put the data into Return Stack.",
 
         // rel
-        "Retrieves data from the return stack."
+        "Retrieves data from the return stack.",
+
+        // while
+        "Loops until condition is met. Real men use recursion.",
+
+        // for
+        "Loops a preset amount of time until number is reached. Loops are for babies."
     ];
 
     return dropdown(categorys, h1, h2);
@@ -276,17 +290,18 @@ function specialcases() {
             "string / int = substring from 0 to int",
             "int / string = substring from int to length",
             "string / string = basically remove dupes",
+            "int / list = item from index of list",
             "list / list = the Not Intersection of 2 Lists"
         ],
 
-        ["list * list = the Intersection of 2 lists"]
+        ["list % list = the Intersection of 2 lists"]
     ];
 
     h2 = [
         "","","","","",
         "","","","",
         "","","","","","","",
-        "","","","",
+        "","","","","",
         "",
     ];
 
@@ -296,12 +311,14 @@ function specialcases() {
 function syntaxstuff() {
     categorys = [
         "Format of HLANG commands",
-        "Token Types"
+        "Token Types",
+        "Comments"
     ];
 
     h1 = [
         ["Must start with a \"/\" which denotes a command. End each command with a \".\""],
-        ["Integer", "Floating", "Bool", "String", "List"]
+        ["Integer", "Floating", "Bool", "String", "List"],
+        ["Comments are single line only and are denoted with a #."]
     ];
 
     h2 = [
@@ -316,11 +333,13 @@ function syntaxstuff() {
         "True or False. Declare using T or NIL.",
 
         //String
-        "A set of characters. Please use quotations to declare a string. To add quotes inside of a string, use \"\\\"\". To add backslashes inside of a string, use \"\\\\\"",
+        "A set of characters. Please use quotations to declare a string. To add quotes inside of a string, use \"\\\"\". To add backslashes inside of a string, use \"\\\\\". To add a # to a string, use \"\\#\".",
 
         //List
-        "A collection of tokens. HLANG Lists do not care about types, allowing you to make tuples. To make a list, use [] separate indexes using \",\"."
+        "A collection of tokens. HLANG Lists do not care about types, allowing you to make tuples. To make a list, use [] separate indexes using \",\".",
 
+        //Comment
+        "# This is a comment!"
     ];
 
     return dropdown(categorys, h1, h2);

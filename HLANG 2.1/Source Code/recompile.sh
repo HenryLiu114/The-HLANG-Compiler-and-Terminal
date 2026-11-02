@@ -21,4 +21,6 @@ jpackage \
   --main-jar HLANG.jar \
   --main-class HSH
 
+mv HLANGCompiler ../Linux
+
 rm -f *.class

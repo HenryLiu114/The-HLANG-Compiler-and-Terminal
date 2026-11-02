@@ -7,7 +7,7 @@ function navbar() {
         <a href="../manualpage/" class="selectionbuttons">Manuals</a>
         <a href="../aboutpage/" class="selectionbuttons">About</a>
         <a href="https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal" class="selectionbuttons">Github</a>
-        <img class="tabbutton" src="../imgs/bars-solid-full.svg">
+        <a href="../compilerpage/" class="selectionbuttons">Code</a>
     </div>
     `;
 }

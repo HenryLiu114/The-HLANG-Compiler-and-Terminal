@@ -1,9 +1,0 @@
-Package: hlang
-Version: 1.0.0
-Section: utils
-Priority: optional
-Architecture: all
-Maintainer: Henry Liu
-Description: HLANG Compiler and runtime system
- A custom programming language compiler and shell system.
- 

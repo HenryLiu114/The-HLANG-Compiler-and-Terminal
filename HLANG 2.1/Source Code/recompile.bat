@@ -1,5 +1,4 @@
 @echo off
-
 javac *.java
 
 mkdir dist
@@ -16,5 +15,7 @@ jpackage ^
   --main-jar HLANG.jar ^
   --main-class HSH ^
   --win-console
+
+move "HLANGCompiler" "../Windows"
 
 removeclasses

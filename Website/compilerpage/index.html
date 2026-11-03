@@ -10,30 +10,30 @@
     <link rel="stylesheet" href="styles.css">
 
     <div class="page">
-        <div class="header2">Online Compiler (Not Working Right Now)</div>
+        <div class="header2">Online Compiler</div>
         <div class="codespace">
-            <textarea class="inputbox" id="codeEditor" placeholder="Type code here..."></textarea>
-            <div class="outputbox">
-                <div class="filespace">
-
-                    <div class="runbutton">
-                        <div class="runtext">
-                            <img class="runicon" src="../imgs/play-solid-full.svg">
-                        </div>
-                    </div>
-                    <div class="savebutton">
-                        <div class="runtext">
-                            <img class="runicon" src="../imgs/floppy-disk-solid-full.svg">
-                        </div>
-                    </div>
-                    <div class="clearbutton">
-                        <div class="runtext">
-                            <img class="runicon" src="../imgs/trash-solid-full.svg">
-                        </div>
+            <textarea class="inputbox" id="codeEditor" placeholder="Type code here..." spellcheck="false"></textarea>
+            <div class="filespace">
+                <div class="runbutton">
+                    <div class="runtext">
+                        <img class="runicon" src="../imgs/play-solid-full.svg">
                     </div>
                 </div>
-
+                <div class="savebutton">
+                    <div class="runtext">
+                        <img class="runicon" src="../imgs/floppy-disk-solid-full.svg">
+                    </div>
+                </div>
+                <div class="clearbutton">
+                    <div class="runtext">
+                        <img class="runicon" src="../imgs/trash-solid-full.svg">
+                    </div>
+                </div>
             </div>
+            <div class="outputbox">
+                <pre id="output"></pre>
+            </div>
+
         </div>
 
     </div>
@@ -64,29 +64,58 @@
                 // Put the cursor right after the newly inserted tab character
                 this.selectionStart = this.selectionEnd = start + tabCharacter.length;
             }
-            else if (e.key == '{'){
+            else if (e.key == '{') {
                 // Prevent the browser from moving focus to the next element
                 e.preventDefault();
                 const start = this.selectionStart;
                 const end = this.selectionEnd;
-                this.value = this.value.substring(0, start)+'{}' + this.value.substring(end);
-                this.selectionStart = this.selectionEnd = start+1;
+                this.value = this.value.substring(0, start) + '{}' + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 1;
             }
-            else if (e.key == '('){
+            else if (e.key == '(') {
                 // Prevent the browser from moving focus to the next element
                 e.preventDefault();
                 const start = this.selectionStart;
                 const end = this.selectionEnd;
-                this.value = this.value.substring(0, start)+'()' + this.value.substring(end);
-                this.selectionStart = this.selectionEnd = start+1;
+                this.value = this.value.substring(0, start) + '()' + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 1;
             }
-            else if (e.key == '['){
+            else if (e.key == '[') {
                 // Prevent the browser from moving focus to the next element
                 e.preventDefault();
                 const start = this.selectionStart;
                 const end = this.selectionEnd;
-                this.value = this.value.substring(0, start)+'[]' + this.value.substring(end);
-                this.selectionStart = this.selectionEnd = start+1;
+                this.value = this.value.substring(0, start) + '[]' + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 1;
+            }
+        });
+
+        const runButton = document.querySelector(".runbutton");
+        const output = document.getElementById("output");
+
+        runButton.addEventListener("click", async function () {
+            const code = textarea.value;
+            console.log(code);
+            output.textContent = "Sending code to Java...";
+
+            try {
+                const response = await fetch("http://localhost:8080/api/run", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ code: code })
+                });
+
+                console.log("HTTP Status:", response.status);
+
+                const result = await response.json();
+
+                output.textContent = result.output;
+
+            } catch (error) {
+                console.error(error);
+                output.textContent = "Error: " + error.message;
             }
         });
     </script>

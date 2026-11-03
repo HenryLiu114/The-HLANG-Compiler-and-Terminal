@@ -58,31 +58,39 @@
 }
 
 .inputbox{
-    width: 66%;
-    height: 422px;
+    width: 100%;
     overflow:auto;
     border: black solid 1px;
+    grid-area: inputbox;
 }
 
 .outputbox{
-    width: 33%;
-    height: 425px;
-    overflow:auto;
+    width: 100%;
     border: black solid 1px;
+    background-color: white;
+    overflow-y: auto;
+    grid-area: outputbox;
 }
 
 .codespace{
     width: 100%;
-    display:flex;
-    flex-direction: row;
+    height: 420px;
+    display:grid;
+    grid-template-columns: 66% 34%;
+    grid-template-rows: 10% 90%;
+    grid-template-areas: 
+    "inputbox filespace"
+    "inputbox outputbox";
 }
 
 .filespace{
-    width: 99.8%;
-    height: 40px;
+    width: 100%;
     display:flex;
     flex-direction: row;
     border: black solid 1px;
+    position: block;
+    background-color: white;
+    grid-area: filespace;
 }
 
 .runbutton {
@@ -143,6 +151,8 @@
     text-align: center;
     padding:5px;
 }
+
+
 
 
 @font-face {

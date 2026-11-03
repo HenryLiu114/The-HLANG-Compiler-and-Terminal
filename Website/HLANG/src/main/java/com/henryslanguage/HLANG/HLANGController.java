@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.io.*;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://henryslanguage.com")
+//@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class HLANGController {

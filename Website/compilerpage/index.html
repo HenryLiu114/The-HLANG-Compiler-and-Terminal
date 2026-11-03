@@ -95,11 +95,10 @@
 
         runButton.addEventListener("click", async function () {
             const code = textarea.value;
-            console.log(code);
-            output.textContent = "Sending code to Java...";
 
             try {
-                const response = await fetch("http://localhost:8080/api/run", {
+                //const response = await fetch("http://localhost:8080/api/run", {
+                const response = await fetch("https://the-hlang-compiler-and-terminal.onrender.com", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

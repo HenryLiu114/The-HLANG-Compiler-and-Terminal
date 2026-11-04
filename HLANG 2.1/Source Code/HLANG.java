@@ -1236,7 +1236,6 @@ public class HLANG {
                 case TokenType.listdec:
                     Token<?> varname = ValStack.pop();
                     LinkedList<Token<?>> list = (LinkedList<Token<?>>)ValStack.pop().data;
-                    System.out.println(varname);
                     for(int i = 0; i < list.size(); i++){
                         Token<?> t = list.get(i);
                         if(t.type == TokenType.var){

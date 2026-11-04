@@ -69,6 +69,7 @@
     border: black solid 1px;
     background-color: white;
     overflow-y: auto;
+    text-wrap: wrap;
     grid-area: outputbox;
 }
 

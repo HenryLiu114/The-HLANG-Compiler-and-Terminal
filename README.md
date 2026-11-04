@@ -41,7 +41,7 @@ I promise the following for this new 2.0 version:
 Thank You for Understanding,
 Henry
 
-# HSh Version: 2.4.1
+# HSh Version: 2.4.2
 To run any hlang file, type:
 | hsh <filepath<awdsa>>.hlang |
 |-------------------|
@@ -57,6 +57,7 @@ To edit a hlang file:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
+| Web1.8 | Nov 3, 2026 | Updated the website to the newest version of HLANG. |
 | v2.4.2 | Nov 3, 2026 | Major Bug Fixes with /list. |
 | Web1.7 | Nov 3, 2026 | Updated the website to the newest version of HLANG. |
 | v2.4.1 | Nov 3, 2026 | /list dereferencing functionality. |

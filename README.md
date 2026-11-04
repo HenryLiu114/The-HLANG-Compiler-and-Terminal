@@ -1,4 +1,4 @@
-# HLANG Version 2.4.1 FULL RELEASE
+# HLANG Version 2.4.2 FULL RELEASE
 A open source java based shell created by yours truly.
 
 This repo also comes in with a built in programming language called "HLANG" (Henry's Language).
@@ -16,7 +16,7 @@ This repo will have a built in shell called "HSh" or Henry's Shell for short.
 # Installation
 | Release | HLANG Version | Source |
 |---------|------|---------|
-| Windows | v2.4.1 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.2.2) |
+| Windows | v2.4.2 | [HLANG Installation Windows](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Windows_Release_2.2.2) |
 | Debian Linux | v2.1 | [HLANG Installation Debian Linux](https://github.com/HenryLiu114/The-HLANG-Compiler-and-Terminal/releases/tag/Ubuntu_Debian_Release_2.1) |
 | Red Hat | N/A | N/A |
 | Arch Linux | N/A | N/A |
@@ -57,8 +57,9 @@ To edit a hlang file:
 # HLANG Changlog:
 | HLANG Version | Date | Changes |
 |---------|------|---------|
+| v2.4.2 | Nov 3, 2026 | Major Bug Fixes with /list. |
 | Web1.7 | Nov 3, 2026 | Updated the website to the newest version of HLANG. |
-| v2.4.0 | Nov 3, 2026 | /list dereferencing functionality. |
+| v2.4.1 | Nov 3, 2026 | /list dereferencing functionality. |
 | Web1.6 | Nov 3, 2026 | Added the online compiler. |
 | Web1.5 | Oct 26, 2026 | Updated the website to the newest version of HLANG. |
 | v2.4.0 | Oct 26, 2026 | The loops and comments update. |

@@ -106,6 +106,7 @@
     font-family: "Sansation", sans-serif;
     background-color: green;
     border-radius: 1vh;
+    cursor: pointer;
 }
 
 .savebutton {
@@ -121,6 +122,7 @@
     font-family: "Sansation", sans-serif;
     background-color: rgb(128, 0, 0);
     border-radius: 1vh;
+    cursor: pointer;
 }
 
 .clearbutton {
@@ -136,6 +138,7 @@
     font-family: "Sansation", sans-serif;
     background-color: rgb(0, 23, 226);
     border-radius: 1vh;
+    cursor: pointer;
 }
 
 .runicon {

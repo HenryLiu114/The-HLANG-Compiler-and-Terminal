@@ -656,6 +656,7 @@ public class HLANG {
                         case "/mul":
                             X1 = ValStack.pop();
                             X2 = ValStack.pop();
+                            
                             if (X1.type == TokenType.integer && X2.type == TokenType.integer) {
                                 int v1 = (Integer) X1.data;
                                 int v2 = (Integer) X2.data;
@@ -707,7 +708,9 @@ public class HLANG {
                             } else if (X1.type == TokenType.wildcard && (X2.type == TokenType.wildcard
                                     || X2.type == TokenType.str)) {
                                 throw new Exception("Infinity Error");
-                            } else if (X1.type == TokenType.list) {
+                            }
+                            
+                            else if (X1.type == TokenType.list) {
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
 
                                 Token<?> v2 = X2;
@@ -740,6 +743,7 @@ public class HLANG {
                         case "/div":
                             X1 = ValStack.pop();
                             X2 = ValStack.pop();
+                            
                             if (X1.type == TokenType.integer && X2.type == TokenType.integer) {
                                 int v1 = (Integer) X1.data;
                                 int v2 = (Integer) X2.data;
@@ -1232,7 +1236,7 @@ public class HLANG {
                 case TokenType.listdec:
                     Token<?> varname = ValStack.pop();
                     LinkedList<Token<?>> list = (LinkedList<Token<?>>)ValStack.pop().data;
-                    
+                    System.out.println(varname);
                     for(int i = 0; i < list.size(); i++){
                         Token<?> t = list.get(i);
                         if(t.type == TokenType.var){
@@ -1242,7 +1246,7 @@ public class HLANG {
                         }
                     }
 
-                    ValStack.push(new Token<>(list, TokenType.list));
+                    variables.put((String) varname.data, new Token<>(list, TokenType.list));
                     break;
                 case TokenType.cons:
                     varname = ValStack.pop();

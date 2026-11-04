@@ -1,3 +1,11 @@
-/var x [1,2,3].
-/list y [/x, 1, 2, 3].
-/print /y.
+/var john ["John Smith", "Computer Science", 2].
+/var alice ["Alice Johnson", "Mathematics", 3].
+/var bob ["Bob Williams", "Engineering", 1].
+/var emily ["Emily Davis", "Biology", 4].
+/list students [/john, /alice, /bob, /emily].
+
+/var len /mul /students ?.
+
+/for i 0 /len 1 {
+    /println /div /i /students.
+}.

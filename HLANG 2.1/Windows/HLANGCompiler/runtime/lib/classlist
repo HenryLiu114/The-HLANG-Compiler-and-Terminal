@@ -63,7 +63,6 @@ java/lang/Class$ReflectionData
 java/lang/ClassCastException
 java/lang/ClassFrameInfo
 java/lang/ClassLoader
-java/lang/ClassLoader$Holder
 java/lang/ClassLoader$ParallelLoaders
 java/lang/ClassNotFoundException
 java/lang/ClassValue
@@ -87,7 +86,6 @@ java/lang/Integer
 java/lang/Integer$IntegerCache
 java/lang/InternalError
 java/lang/Iterable
-java/lang/LazyConstant
 java/lang/LinkageError
 java/lang/LiveStackFrame
 java/lang/LiveStackFrameInfo
@@ -119,8 +117,6 @@ java/lang/Runnable
 java/lang/Runtime
 java/lang/Runtime$Version
 java/lang/RuntimeException
-java/lang/ScopedValue
-java/lang/ScopedValue$Cache
 java/lang/Short
 java/lang/Short$ShortCache
 java/lang/Shutdown
@@ -134,7 +130,6 @@ java/lang/StackWalker$StackFrame
 java/lang/StrictMath
 java/lang/String
 java/lang/String$CaseInsensitiveComparator
-java/lang/String$FoldCaseComparator
 java/lang/StringBuffer
 java/lang/StringBuilder
 java/lang/StringCoding
@@ -490,9 +485,6 @@ java/nio/channels/spi/AbstractInterruptibleChannel
 java/nio/channels/spi/AbstractInterruptibleChannel$1
 java/nio/channels/spi/AbstractSelectableChannel
 java/nio/charset/Charset
-java/nio/charset/Charset$3
-java/nio/charset/Charset$4
-java/nio/charset/Charset$5
 java/nio/charset/CharsetDecoder
 java/nio/charset/CharsetEncoder
 java/nio/charset/CoderResult
@@ -613,6 +605,8 @@ java/time/temporal/IsoFields$Field$2
 java/time/temporal/IsoFields$Field$3
 java/time/temporal/IsoFields$Field$4
 java/time/temporal/IsoFields$Unit
+java/time/temporal/JulianFields
+java/time/temporal/JulianFields$Field
 java/time/temporal/Temporal
 java/time/temporal/TemporalAccessor
 java/time/temporal/TemporalAdjuster
@@ -739,11 +733,9 @@ java/util/List
 java/util/ListIterator
 java/util/ListResourceBundle
 java/util/Locale
-java/util/Locale$1
-java/util/Locale$2
-java/util/Locale$3
 java/util/Locale$Builder
 java/util/Locale$Category
+java/util/Locale$LocaleCache
 java/util/Map
 java/util/Map$Entry
 java/util/NavigableMap
@@ -760,7 +752,6 @@ java/util/RegularEnumSet
 java/util/ResourceBundle
 java/util/ResourceBundle$1
 java/util/ResourceBundle$2
-java/util/ResourceBundle$3
 java/util/ResourceBundle$Control
 java/util/ResourceBundle$NoFallbackControl
 java/util/ResourceBundle$ResourceBundleProviderHelper
@@ -1129,8 +1120,6 @@ jdk/internal/jimage/BasicImageReader$1
 jdk/internal/jimage/ImageHeader
 jdk/internal/jimage/ImageLocation
 jdk/internal/jimage/ImageReader
-jdk/internal/jimage/ImageReader$Directory
-jdk/internal/jimage/ImageReader$Node
 jdk/internal/jimage/ImageReader$SharedImageReader
 jdk/internal/jimage/ImageReaderFactory
 jdk/internal/jimage/ImageReaderFactory$1
@@ -1139,12 +1128,10 @@ jdk/internal/jimage/ImageStringsReader
 jdk/internal/jimage/NativeImageBuffer
 jdk/internal/jimage/NativeImageBuffer$1
 jdk/internal/jimage/decompressor/Decompressor
-jdk/internal/lang/LazyConstantImpl
 jdk/internal/loader/AbstractClassLoaderValue
 jdk/internal/loader/AbstractClassLoaderValue$Memoizer
 jdk/internal/loader/ArchivedClassLoaders
 jdk/internal/loader/BootLoader
-jdk/internal/loader/BootLoader$Holder
 jdk/internal/loader/BuiltinClassLoader
 jdk/internal/loader/BuiltinClassLoader$1
 jdk/internal/loader/BuiltinClassLoader$2
@@ -1160,7 +1147,6 @@ jdk/internal/loader/NativeLibraries
 jdk/internal/loader/NativeLibraries$1
 jdk/internal/loader/NativeLibraries$2
 jdk/internal/loader/NativeLibraries$CountedLock
-jdk/internal/loader/NativeLibraries$Holder
 jdk/internal/loader/NativeLibraries$LibraryPaths
 jdk/internal/loader/NativeLibraries$NativeLibraryContext
 jdk/internal/loader/NativeLibraries$NativeLibraryContext$1
@@ -1207,7 +1193,6 @@ jdk/internal/module/Checks
 jdk/internal/module/DefaultRoots
 jdk/internal/module/ModuleBootstrap
 jdk/internal/module/ModuleBootstrap$Counters
-jdk/internal/module/ModuleBootstrap$IllegalFinalFieldMutation
 jdk/internal/module/ModuleBootstrap$IllegalNativeAccess
 jdk/internal/module/ModuleBootstrap$SafeModuleFinder
 jdk/internal/module/ModuleHashes
@@ -1240,6 +1225,7 @@ jdk/internal/module/SystemModulesMap
 jdk/internal/perf/Perf
 jdk/internal/perf/PerfCounter
 jdk/internal/perf/PerfCounter$CoreCounters
+jdk/internal/ref/Cleaner
 jdk/internal/ref/CleanerFactory
 jdk/internal/ref/CleanerFactory$1
 jdk/internal/ref/CleanerImpl
@@ -1271,7 +1257,6 @@ jdk/internal/util/ArraysSupport
 jdk/internal/util/ByteArray
 jdk/internal/util/ClassFileDumper
 jdk/internal/util/DecimalDigits
-jdk/internal/util/EnvUtils
 jdk/internal/util/Exceptions
 jdk/internal/util/ModifiedUtf
 jdk/internal/util/Preconditions
@@ -1295,8 +1280,6 @@ jdk/internal/vm/Continuation$Pinned
 jdk/internal/vm/ContinuationScope
 jdk/internal/vm/ContinuationSupport
 jdk/internal/vm/FillerObject
-jdk/internal/vm/PostVMInitHook
-jdk/internal/vm/PreemptedException
 jdk/internal/vm/SharedThreadContainer
 jdk/internal/vm/StackChunk
 jdk/internal/vm/StackableScope
@@ -1304,13 +1287,13 @@ jdk/internal/vm/ThreadContainer
 jdk/internal/vm/ThreadContainers
 jdk/internal/vm/ThreadContainers$RootContainer
 jdk/internal/vm/ThreadContainers$RootContainer$TrackingRootContainer
-jdk/internal/vm/annotation/AOTSafeClassInitializer
 jdk/internal/vm/annotation/Stable
 jdk/internal/vm/vector/VectorSupport
 jdk/internal/vm/vector/VectorSupport$Vector
 jdk/internal/vm/vector/VectorSupport$VectorMask
 jdk/internal/vm/vector/VectorSupport$VectorPayload
 jdk/internal/vm/vector/VectorSupport$VectorShuffle
+sun/invoke/empty/Empty
 sun/invoke/util/ValueConversions
 sun/invoke/util/ValueConversions$WrapperCache
 sun/invoke/util/VerifyAccess
@@ -1325,6 +1308,7 @@ sun/net/util/URLUtil
 sun/net/www/ParseUtil
 sun/net/www/protocol/file/Handler
 sun/net/www/protocol/jar/Handler
+sun/nio/ByteBuffered
 sun/nio/ch/ChannelInputStream
 sun/nio/ch/DirectBuffer
 sun/nio/ch/FileChannelImpl
@@ -1391,6 +1375,7 @@ sun/nio/fs/WindowsFileAttributeViews$Basic
 sun/nio/fs/WindowsFileAttributes
 sun/nio/fs/WindowsFileSystem
 sun/nio/fs/WindowsFileSystemProvider
+sun/nio/fs/WindowsLinkSupport
 sun/nio/fs/WindowsNativeDispatcher
 sun/nio/fs/WindowsNativeDispatcher$Account
 sun/nio/fs/WindowsNativeDispatcher$AclInformation
@@ -1410,7 +1395,6 @@ sun/security/util/Debug
 sun/security/util/SecurityProperties
 sun/security/util/SignatureFileVerifier
 sun/text/resources/cldr/FormatData
-sun/usagetracker/UsageTrackerClient
 sun/util/PreHashedMap
 sun/util/calendar/AbstractCalendar
 sun/util/calendar/BaseCalendar
@@ -1428,7 +1412,7 @@ sun/util/cldr/CLDRBaseLocaleDataMetaInfo
 sun/util/cldr/CLDRCalendarDataProviderImpl
 sun/util/cldr/CLDRLocaleProviderAdapter
 sun/util/locale/BaseLocale
-sun/util/locale/BaseLocale$1
+sun/util/locale/BaseLocale$1InterningCache
 sun/util/locale/InternalLocaleBuilder
 sun/util/locale/InternalLocaleBuilder$CaseInsensitiveChar
 sun/util/locale/LanguageTag
@@ -1496,7 +1480,6 @@ sun/util/spi/CalendarProvider
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DelegatingMethodHandle$Holder reinvoke_L LLI_L
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DelegatingMethodHandle$Holder reinvoke_L LLJJ_L
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DelegatingMethodHandle$Holder reinvoke_L LLJ_L
-@lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DelegatingMethodHandle$Holder reinvoke_L LL_I
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DelegatingMethodHandle$Holder reinvoke_L LL_L
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DelegatingMethodHandle$Holder reinvoke_L L_L
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DelegatingMethodHandle$Holder reinvoke_L L_V
@@ -1568,6 +1551,7 @@ sun/util/spi/CalendarProvider
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LD_L
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LFF_I
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LF_I
+@lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LF_L
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LI3_I
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LII_I
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LIL5_V
@@ -1576,6 +1560,7 @@ sun/util/spi/CalendarProvider
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LI_L
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LJJ_I
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LJ_I
+@lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LJ_L
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LLIILLILLIL_V
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LLI_I
 @lambda-form-invoker [LF_RESOLVE] java.lang.invoke.DirectMethodHandle$Holder invokeStatic LL_I

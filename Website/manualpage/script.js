@@ -168,7 +168,7 @@ function reservedWords() {
         // var
         "Sets &lt;name&gt;'s data as &lt;token&gt;. " +
         "Type inference is applied. You may also " +
-        "declare a list using /var.",
+        "declare a list using /var. (Note: it cant be dereferenced)",
 
         // and
         "Finds the and of &lt;x1&gt; and &lt;x2&gt;. &lt;x1&gt; and &lt;x2&gt; " +
@@ -209,7 +209,7 @@ function reservedWords() {
         "Creates a new function with &lt;functName&gt;. Note: different &lt;parameters&gt; are spaced out using a space “ “.",
 
         // list
-        "Another way to declare a list without /var. Potentially remove in the future.",
+        "Creates a fully dereferenced list.",
 
         // cons
         "Does absolutely nothing, plan to remove.",
@@ -290,7 +290,7 @@ function specialcases() {
             "string / int = substring from 0 to int",
             "int / string = substring from int to length",
             "string / string = basically remove dupes",
-            "int / list = item from index of list",
+            "int / list = item from index of list, also dereferences an item if it is a variable",
             "list / list = the Not Intersection of 2 Lists"
         ],
 

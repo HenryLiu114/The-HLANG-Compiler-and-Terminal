@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "HLANG Compiler"
-#define MyAppVersion "2.4.0"
+#define MyAppVersion "2.4.1"
 #define MyAppPublisher "Henry Liu"
 #define MyAppURL "N/A"
 
@@ -12,7 +12,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{0B45CAE8-480A-430E-A7A9-FC9CDEF067A5}
 AppName=HLANG
-AppVersion=2.4.0
+AppVersion=2.4.1
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
@@ -34,7 +34,7 @@ SetupIconFile=icon.ico
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "C:\Users\Henry Liu\Desktop\HLANG Source\The-HLANG-Compiler-and-Terminal\HLANG 2.1\Windows\*"; \
+Source: "C:\Users\Henry\OneDrive\Desktop\HLang Source Files\The-HLANG-Compiler-and-Terminal\HLANG 2.1\Windows\*"; \
 DestDir: "{app}"; \
 Flags: ignoreversion recursesubdirs createallsubdirs
 

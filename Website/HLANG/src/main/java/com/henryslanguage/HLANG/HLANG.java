@@ -1,5 +1,4 @@
 package com.henryslanguage.HLANG;
-
 import java.io.EOFException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +46,7 @@ public class HLANG {
         str,
         bool,
         list,
-        wildcard,
+        wildcard
     }
 
     private static class Token<T> {
@@ -527,8 +526,8 @@ public class HLANG {
             throws Exception {
         // System.out.println(cmd);
         LinkedList<Token<?>> interpret = Interpreter(Parser(Lexer(cmd)));
-        // System.out.println("Val Stack: " + ValStack);
-        // System.out.println("Interpeted String: " + interpret);
+        //System.out.println("Val Stack: " + ValStack);
+        //System.out.println("Interpeted String: " + interpret);
         // System.out.println("Vars: " + variables);
         // System.out.println("Return Stack: " + returnStack);
         while (!interpret.isEmpty()) {
@@ -833,6 +832,10 @@ public class HLANG {
                                         break;
                                     case TokenType.list:
                                         ValStack.push(new Token<>((LinkedList<Token<?>>) res.data, TokenType.list));
+                                        break;
+                                    case TokenType.var:
+                                        Token<?> t = variables.get(((String) res.data).substring(1));
+                                        ValStack.push(new Token<>(t.data, t.type));
                                         break;
                                     default:
                                         break;
@@ -1229,8 +1232,18 @@ public class HLANG {
                     break;
                 case TokenType.listdec:
                     Token<?> varname = ValStack.pop();
-                    Token<?> list = ValStack.pop();
-                    variables.put((String) varname.data, list);
+                    LinkedList<Token<?>> list = (LinkedList<Token<?>>)ValStack.pop().data;
+                    
+                    for(int i = 0; i < list.size(); i++){
+                        Token<?> t = list.get(i);
+                        if(t.type == TokenType.var){
+                            String varname1 = (String)t.data;
+                            String varname2 = varname1.substring(1);
+                            list.set(i, variables.get(varname2));
+                        }
+                    }
+
+                    ValStack.push(new Token<>(list, TokenType.list));
                     break;
                 case TokenType.cons:
                     varname = ValStack.pop();

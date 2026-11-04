@@ -1,4 +1,6 @@
 import java.io.EOFException;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,6 +41,12 @@ public class HLANG {
         While,
         For,
         comment,
+        convertcsv,
+        csvcolumns,
+        modify,
+        writedestination,
+        writetext,
+        listtocsv,
         // Data Types
         integer,
         floating,
@@ -363,6 +371,21 @@ public class HLANG {
                     case "/for":
                         lexedList.add(new Token<String>(curStr, TokenType.For));
                         break;
+                    case "/csv":
+                        lexedList.add(new Token<String>(curStr, TokenType.convertcsv));
+                        break;
+                    case "/colspl":
+                        lexedList.add(new Token<String>(curStr, TokenType.csvcolumns));
+                        break;
+                    case "/modi":
+                        lexedList.add(new Token<String>(curStr, TokenType.modify));
+                        break;
+                    case "/write":
+                        lexedList.add(new Token<String>(curStr, TokenType.writetext));
+                        break;
+                    case "/lcsv":
+                        lexedList.add(new Token<String>(curStr, TokenType.listtocsv));
+                        break;
                     default:
                         lexedList.add(new Token<String>(curStr, TokenType.var));
                         break;
@@ -467,14 +490,14 @@ public class HLANG {
         switch (cur.type) {
             case TokenType.arithmetic, TokenType.vardec, TokenType.logical, TokenType.conditional, TokenType.functdec,
                     TokenType.listdec, TokenType.cons, TokenType.car, TokenType.cdr, TokenType.input, TokenType.mapcar,
-                    TokenType.copyl, TokenType.While:
+                    TokenType.copyl, TokenType.While, TokenType.convertcsv, TokenType.writetext:
                 childrenCount = 2;
                 break;
             case TokenType.singleArith, TokenType.logicalnot, TokenType.output, TokenType.listlogic, TokenType.returnto,
-                    TokenType.releaseto:
+                    TokenType.releaseto, TokenType.csvcolumns, TokenType.listtocsv:
                 childrenCount = 1;
                 break;
-            case TokenType.ifstmt, TokenType.functcreate:
+            case TokenType.ifstmt, TokenType.functcreate, TokenType.modify:
                 childrenCount = 3;
                 break;
             case TokenType.For:
@@ -525,8 +548,8 @@ public class HLANG {
             throws Exception {
         // System.out.println(cmd);
         LinkedList<Token<?>> interpret = Interpreter(Parser(Lexer(cmd)));
-        //System.out.println("Val Stack: " + ValStack);
-        //System.out.println("Interpeted String: " + interpret);
+        // System.out.println("Val Stack: " + ValStack);
+        // System.out.println("Interpeted String: " + interpret);
         // System.out.println("Vars: " + variables);
         // System.out.println("Return Stack: " + returnStack);
         while (!interpret.isEmpty()) {
@@ -656,7 +679,7 @@ public class HLANG {
                         case "/mul":
                             X1 = ValStack.pop();
                             X2 = ValStack.pop();
-                            
+
                             if (X1.type == TokenType.integer && X2.type == TokenType.integer) {
                                 int v1 = (Integer) X1.data;
                                 int v2 = (Integer) X2.data;
@@ -709,7 +732,7 @@ public class HLANG {
                                     || X2.type == TokenType.str)) {
                                 throw new Exception("Infinity Error");
                             }
-                            
+
                             else if (X1.type == TokenType.list) {
                                 LinkedList<Token<?>> v1 = (LinkedList<Token<?>>) X1.data;
 
@@ -743,7 +766,7 @@ public class HLANG {
                         case "/div":
                             X1 = ValStack.pop();
                             X2 = ValStack.pop();
-                            
+
                             if (X1.type == TokenType.integer && X2.type == TokenType.integer) {
                                 int v1 = (Integer) X1.data;
                                 int v2 = (Integer) X2.data;
@@ -814,13 +837,12 @@ public class HLANG {
                                     }
                                 }
                                 ValStack.push(new Token<>(v1, TokenType.list));
-                            } 
-                            else if (X1.type == TokenType.integer && X2.type == TokenType.list){
+                            } else if (X1.type == TokenType.integer && X2.type == TokenType.list) {
                                 int v1 = (int) X1.data;
                                 LinkedList<Token<?>> v2 = (LinkedList<Token<?>>) X2.data;
                                 Token<?> res = v2.get(v1);
                                 TokenType type = res.type;
-                                switch(type){
+                                switch (type) {
                                     case TokenType.integer:
                                         ValStack.push(new Token<>((int) res.data, TokenType.integer));
                                         break;
@@ -842,11 +864,10 @@ public class HLANG {
                                         break;
                                     default:
                                         break;
-                                    
+
                                 }
 
-                            }
-                            else {
+                            } else {
                                 throw new Exception("Cannot Compile: Division Type Error!");
                             }
                             break;
@@ -1235,11 +1256,11 @@ public class HLANG {
                     break;
                 case TokenType.listdec:
                     Token<?> varname = ValStack.pop();
-                    LinkedList<Token<?>> list = (LinkedList<Token<?>>)ValStack.pop().data;
-                    for(int i = 0; i < list.size(); i++){
+                    LinkedList<Token<?>> list = (LinkedList<Token<?>>) ValStack.pop().data;
+                    for (int i = 0; i < list.size(); i++) {
                         Token<?> t = list.get(i);
-                        if(t.type == TokenType.var){
-                            String varname1 = (String)t.data;
+                        if (t.type == TokenType.var) {
+                            String varname1 = (String) t.data;
                             String varname2 = varname1.substring(1);
                             list.set(i, variables.get(varname2));
                         }
@@ -1330,7 +1351,7 @@ public class HLANG {
                     Compiler((String) condi.data, variables, ValStack, functions, returnStack);
                     condition = ValStack.pop();
                     cond = (Boolean) condition.data;
-                
+
                     while (cond) {
                         Compiler((String) doStuff.data, variables, ValStack, functions, returnStack);
                         Compiler((String) condi.data, variables, ValStack, functions, returnStack);
@@ -1344,18 +1365,103 @@ public class HLANG {
                     Token<?> endstate = ValStack.pop();
                     Token<?> increment = ValStack.pop();
                     Token<?> stuffToDo = ValStack.pop();
-                    
+
                     int init = (int) inital.data;
                     int stop = (int) endstate.data;
                     int incre = (int) increment.data;
 
-                    
-                    for(int i = init; i != stop; i+=incre){
+                    for (int i = init; i != stop; i += incre) {
                         Token<?> token = new Token<>(i, TokenType.integer);
                         variables.put((String) iterable.data, token);
                         Compiler((String) stuffToDo.data, variables, ValStack, functions, returnStack);
                     }
-                    
+
+                    break;
+                case TokenType.convertcsv:
+                    String varname1 = (String) ValStack.pop().data;
+                    String filename = (String) ValStack.pop().data;
+                    File f = new File(filename);
+                    Scanner fc = new Scanner(f);
+                    LinkedList<Token<?>> insertvar = new LinkedList<>();
+                    while (fc.hasNextLine()) {
+                        String currentLine = fc.nextLine();
+                        String[] spl = parseCSVLine(currentLine);
+                        LinkedList<Token<?>> insert = new LinkedList<>();
+                        for (int i = 0; i < spl.length; i++) {
+                            Token<?> insertion;
+                            try {
+                                int datI = Integer.parseInt(spl[i]);
+                                insertion = new Token<>(datI, TokenType.integer);
+                            } catch (NumberFormatException e) {
+                                try {
+                                    double datI = Double.parseDouble(spl[i]);
+                                    insertion = new Token<>(datI, TokenType.floating);
+                                } catch (NumberFormatException e1) {
+                                    String datI = spl[i];
+                                    insertion = new Token<>(datI, TokenType.str);
+                                }
+                            }
+                            insert.add(insertion);
+                        }
+                        insertvar.add(new Token<>(insert, TokenType.list));
+                    }
+                    variables.put(varname1, new Token<>(insertvar, TokenType.list));
+                    fc.close();
+                    break;
+                case TokenType.csvcolumns:
+                    Token<?> popdata = ValStack.pop();
+                    LinkedList<Token<?>> varname2 = (LinkedList<Token<?>>) popdata.data;
+                    LinkedList<Token<?>> startingRow = (LinkedList<Token<?>>) varname2.get(0).data;
+                    for (int i = 0; i < startingRow.size(); i++) {
+                        LinkedList<Token<?>> tok = new LinkedList<>();
+                        for (int j = 1; j < varname2.size(); j++) {
+                            LinkedList<Token<?>> currentRow = (LinkedList<Token<?>>) varname2.get(j).data;
+                            tok.add(currentRow.get(i));
+                        }
+                        variables.put((String) startingRow.get(i).data, new Token<>(tok, TokenType.list));
+                    }
+                    break;
+                case TokenType.modify:
+                    varname1 = (String) ValStack.pop().data;
+                    int indexatv = (int) ValStack.pop().data;
+                    Token<?> replacement = ValStack.pop();
+                    LinkedList<Token<?>> liss = (LinkedList<Token<?>>) variables.get(varname1).data;
+                    liss.set(indexatv, replacement);
+                    break;
+                case TokenType.writetext:
+                    String filename1 = (String) ValStack.pop().data;
+                    popdata = ValStack.pop();
+                    PrintWriter pw = new PrintWriter(filename1);
+                    pw.println(popdata);
+                    pw.close();
+                    break;
+                case TokenType.listtocsv:
+                    LinkedList<Token<?>> lis1 = (LinkedList<Token<?>>) ValStack.pop().data;
+                    String out = "";
+                    for (int i = 0; i < lis1.size() - 1; i++) {
+                        if (lis1.get(i).type == TokenType.str) {
+                            String out1 = (String) lis1.get(i).data;
+                            if (out1.contains(",")) {
+                                out += "\"" + out1 + "\",";
+                            } else {
+                                out += out1 + ",";
+                            }
+                        } else {
+                            out += lis1.get(i).toString() + ",";
+                        }
+                    }
+                    if (lis1.get(lis1.size() - 1).type == TokenType.str) {
+                        String out1 = (String) lis1.get(lis1.size() - 1).data;
+                        if (out1.contains(",")) {
+                            out += "\"" + out1 + "\"";
+                        } else {
+                            out += out1;
+                        }
+                    } else {
+                        out += lis1.get(lis1.size() - 1).toString();
+                    }
+                    ValStack.push(new Token<>(out, TokenType.str));
+
                     break;
                 default:
                     break;
@@ -1510,5 +1616,34 @@ public class HLANG {
         }
 
         return count;
+    }
+
+    public static String[] parseCSVLine(String line) {
+        LinkedList<String> values = new LinkedList<>();
+        StringBuilder current = new StringBuilder();
+        boolean inQuotes = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+
+            if (c == '"') {
+                if (inQuotes && i + 1 < line.length()
+                        && line.charAt(i + 1) == '"') {
+                    current.append('"');
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (c == ',' && !inQuotes) {
+                values.add(current.toString());
+                current.setLength(0);
+            } else {
+                current.append(c);
+            }
+        }
+
+        values.add(current.toString());
+
+        return values.toArray(new String[0]);
     }
 }

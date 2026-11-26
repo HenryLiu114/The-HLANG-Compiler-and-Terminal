@@ -41,6 +41,10 @@ I promise the following for this new 2.0 version:
 Thank You for Understanding,
 Henry
 
+# Building and Running
+To build the program, run `./gradlew build` or `.\gradlew.bat build` on Windows. To run it, run
+`./gradlew run --args="/path/to/hlang-file.hlang"`, or `.\gradlew run --args="C:\path\to\hlang-file.hlang"`.
+
 # HSh Version: 2.4.2
 To run any hlang file, type:
 | hsh <filepath<awdsa>>.hlang |

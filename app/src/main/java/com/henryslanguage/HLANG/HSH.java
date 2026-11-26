@@ -22,9 +22,24 @@ public class HSH {
         return res.toString();
     }
 
-    public static void main(String[] args) throws FileNotFoundException, Exception {
-        String stuff = readFromFile(args[0]);
-        HLANG.Compiler(stuff, new HashMap<>(), new Stack<>(), new HashMap<>(), new Stack<>());
+    public static void main(String[] args) {
+        if (args.length != 1)
+        {
+            System.err.println("Usage: hsh /path/to/hlang-source-file.hlang");
+            System.exit(1);
+        }
+
+        try {
+            String stuff = readFromFile(args[0]);
+            HLANG.Compiler(stuff, new HashMap<>(), new Stack<>(), new HashMap<>(), new Stack<>());
+        } catch (FileNotFoundException e) {
+            System.err.println("ERROR: Cannot find file " + args[0]);
+            System.exit(1);
+        } catch (Exception e)
+        {
+            System.err.println("Error running program: " + e.getMessage());
+            System.exit(1);
+        }
     }
     //public static void main(String[] args) throws FileNotFoundException, Exception {
         //String stuff = readFromFile("./getindex.hlang");
